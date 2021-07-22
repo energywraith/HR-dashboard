@@ -19,4 +19,12 @@ Route::get('/', function () {
 
 Auth::routes();
 
+Route::post('/tokens/create', function (Request $request) {
+    $token = $request->user()->createToken($request->token_name);
+
+    return ['token' => $token->plainTextToken];
+});
+
 Route::get('/dashboard/{path?}', [App\Http\Controllers\HomeController::class, 'index'])->name('dashboard');
+
+Route::post('/logout', [App\Http\Controllers\HomeController::class, 'index'])->name('logout');

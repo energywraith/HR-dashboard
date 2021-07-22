@@ -14,24 +14,29 @@ const Nav = () => {
 
   return (
     <nav className='dashboard-nav'>
-      <ul>
-        <li>
-          <NavLink exact to='/dashboard'>
+      <ul className='nav-links'>
+        <li className='nav-link-container'>
+          <NavLink exact to='/dashboard' className='nav-link'>
             Home
           </NavLink>
         </li>
-        <li>
-          <NavLink exact to='/dashboard/applications'>
-            Manage applications
+        <li className='nav-link-container'>
+          <NavLink exact to='/dashboard/company' className='nav-link'>
+            Company details
           </NavLink>
         </li>
-        <li>
-          <NavLink exact to='/dashboard/company'>
-            Change company details
+        <li className='nav-link-container'>
+          <NavLink exact to='/dashboard/application-form' className='nav-link'>
+            Application form
           </NavLink>
         </li>
-        <li className='logout' onClick={event => handleLogout(event)}>
-          <NavLink exact to='/'>
+        <li className='nav-link-container'>
+          <NavLink exact to='/dashboard/applications' className='nav-link'>
+            Received applications
+          </NavLink>
+        </li>
+        <li className='nav-link-container logout' onClick={handleLogout}>
+          <NavLink exact to='/' className='nav-link'>
             Logout
           </NavLink>
         </li>
