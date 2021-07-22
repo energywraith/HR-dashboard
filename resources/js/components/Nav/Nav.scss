@@ -1,22 +1,24 @@
-nav {
+nav.dashboard-nav {
   background: white;
   display: flex;
   flex-direction: column;
   height: 100%;
   box-shadow: 0px 0px 1px black;
 
-  button {
-    padding: 1em 2em;
-    border: 0;
-    background: white;
-    box-shadow: -1px 0px 1px black;
+    ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
 
-    &.logout {
-      
-    }
+      li {
+      padding: 1em 2em;
+      border: 0;
+      background: white;
+      box-shadow: -1px 0px 1px black;
 
-    &:active {
-      
+      & > a.active {
+        color: red;
+      }
     }
   }
 }

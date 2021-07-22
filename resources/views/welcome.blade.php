@@ -40,7 +40,37 @@
             @endif
             </div>
         </div> -->
-        WELCOME
+        @guest
+            @if (Route::has('login'))
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                </li>
+            @endif
+
+            @if (Route::has('register'))
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                </li>
+            @endif
+        @else
+            <li class="nav-item dropdown">
+                <a href={{ route('dashboard') }}>
+                    {{ Auth::user()->name }}
+                </a>
+
+                <a href="" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                    Logout
+                </a>
+                
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                    @csrf
+                </form>
+
+                <a href={{ route('dashboard') }}>
+                    Go to dashboard
+                </a>
+            </li>
+        @endguest
         <div id="example"></div>
     </body>
 </html>

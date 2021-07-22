@@ -1,5 +1,6 @@
 import './Nav.scss'
 import axios from 'axios';
+import { NavLink } from 'react-router-dom'
 
 const Nav = () => {
   const handleLogout = async (event) => {
@@ -12,19 +13,29 @@ const Nav = () => {
   }
 
   return (
-    <nav>
-      <button>
-        Home
-      </button>
-      <button>
-        Manage applications
-      </button>
-      <button>
-        Change company details
-      </button>
-      <button className='logout' onClick={event => handleLogout(event)}>
-        Logout
-      </button>
+    <nav className='dashboard-nav'>
+      <ul>
+        <li>
+          <NavLink exact to='/dashboard'>
+            Home
+          </NavLink>
+        </li>
+        <li>
+          <NavLink exact to='/dashboard/applications'>
+            Manage applications
+          </NavLink>
+        </li>
+        <li>
+          <NavLink exact to='/dashboard/company'>
+            Change company details
+          </NavLink>
+        </li>
+        <li className='logout' onClick={event => handleLogout(event)}>
+          <NavLink exact to='/'>
+            Logout
+          </NavLink>
+        </li>
+      </ul>
     </nav>
   )
 }
