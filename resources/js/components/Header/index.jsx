@@ -10,9 +10,9 @@ const Header = ({ companyName }) => {
       <span>
         {companyName}
       </span>
-      <Link exact to='/'>
+      <button>
         Logout
-      </Link>
+      </button>
     </div>
   )
 }

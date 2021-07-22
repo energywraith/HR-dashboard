@@ -2175,9 +2175,7 @@ var Header = function Header(_ref) {
       children: "HR-dashboard"
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("span", {
       children: companyName
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_2__.Link, {
-      exact: true,
-      to: "/",
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("button", {
       children: "Logout"
     })]
   });
@@ -2230,20 +2228,21 @@ var Nav = function Nav() {
               return axios__WEBPACK_IMPORTED_MODULE_2___default().post('/logout');
 
             case 4:
-              _context.next = 9;
+              window.location.href = '/';
+              _context.next = 10;
               break;
 
-            case 6:
-              _context.prev = 6;
+            case 7:
+              _context.prev = 7;
               _context.t0 = _context["catch"](1);
               console.log(_context.t0);
 
-            case 9:
+            case 10:
             case "end":
               return _context.stop();
           }
         }
-      }, _callee, null, [[1, 6]]);
+      }, _callee, null, [[1, 7]]);
     }));
 
     return function handleLogout(_x) {
@@ -2289,11 +2288,8 @@ var Nav = function Nav() {
         })
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("li", {
         className: "nav-link-container logout",
-        onClick: handleLogout,
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_4__.NavLink, {
-          exact: true,
-          to: "/",
-          className: "nav-link",
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
+          onClick: handleLogout,
           children: "Logout"
         })
       })]

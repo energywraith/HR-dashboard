@@ -1,12 +1,13 @@
 import './Nav.scss'
 import axios from 'axios';
-import { NavLink } from 'react-router-dom'
+import { NavLink, Redirect } from 'react-router-dom'
 
 const Nav = () => {
   const handleLogout = async (event) => {
     event.preventDefault;
     try {
       await axios.post('/logout')
+      window.location.href = '/'
     } catch (error) {
       console.log(error)
     }
@@ -35,10 +36,12 @@ const Nav = () => {
             Received applications
           </NavLink>
         </li>
-        <li className='nav-link-container logout' onClick={handleLogout}>
-          <NavLink exact to='/' className='nav-link'>
+        <li className='nav-link-container logout'>
+          {/* <NavLink exact to='/' className='nav-link'> */}
+          <button onClick={handleLogout}>
             Logout
-          </NavLink>
+          </button>
+          {/* </NavLink> */}
         </li>
       </ul>
     </nav>

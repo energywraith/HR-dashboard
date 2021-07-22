@@ -26,5 +26,3 @@ Route::post('/tokens/create', function (Request $request) {
 });
 
 Route::get('/dashboard/{path?}', [App\Http\Controllers\HomeController::class, 'index'])->name('dashboard');
-
-Route::post('/logout', [App\Http\Controllers\HomeController::class, 'index'])->name('logout');
