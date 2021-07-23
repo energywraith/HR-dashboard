@@ -2,18 +2,28 @@ import { Link } from 'react-router-dom'
 import './Header.scss'
 
 const Header = ({ companyName }) => {
+  const handleLogout = async (event) => {
+    event.preventDefault;
+    try {
+      await axios.post('/logout')
+      window.location.href = '/'
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
   return (
-    <div className='header'>
+    <header className='dashboard-header'>
       <Link exact to='/dashboard'>
         HR-dashboard
       </Link>
       <span>
         {companyName}
       </span>
-      <button>
+      <a href='' onClick={handleLogout}>
         Logout
-      </button>
-    </div>
+      </a>
+    </header>
   )
 }
 

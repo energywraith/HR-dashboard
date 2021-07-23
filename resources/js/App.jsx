@@ -2,9 +2,10 @@ import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
 import axios from 'axios';
-import Header from './components/Header';
-import Nav from './components/Nav';
 import './App.scss'
+
+import Dashboard from './layouts/Dashboard';
+import CompanyDetails from './views/CompanyDetails';
 
 const App = () => {
   const [xsrfToken, setXsrfToken] = useState(null)
@@ -16,34 +17,30 @@ const App = () => {
       const token = cookie.config.headers['X-XSRF-TOKEN']
       setXsrfToken(token)
 
-      const company = await axios.get('/api/user', {
-        headers: {
-          'X-XSRF-TOKEN': token
-        }
-      })
-      setCompany(company.data)
+      const response = await axios.get('/api/user')
+      setCompany(response.data)
     }
 
     fetch()
   }, [])
 
   return (
-    <div className='app-container'>
-      <Header companyName={company && company.name} />
-      <Nav />
-
+    <Dashboard>
       <Switch>
-        <Route path='/dashboard/company'>
-          <h1>Company</h1>
+        <Route path='/dashboard/company-details'>
+          <CompanyDetails company={company} setCompany={setCompany} />
         </Route>
         <Route path='/dashboard/application-form'>
           <h1>Application form</h1>
+        </Route>
+        <Route path='/dashboard/positions'>
+          <h1>Open positions</h1>
         </Route>
         <Route path='/dashboard/applications'>
           <h1>Received applications</h1>
         </Route>
         <Route path='/dashboard/' exact>
-          <h1>Home</h1>
+          <h1> Hello {company && company.name} </h1>
         </Route>
         <Route path='/dashboard/404'>
           <h1> Page does not exist </h1>
@@ -52,7 +49,7 @@ const App = () => {
           <Redirect to="404" />
         </Route>
       </Switch>
-    </div>
+    </Dashboard>
   );
 }
 

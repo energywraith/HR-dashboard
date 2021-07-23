@@ -21,6 +21,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'company_details',
     ];
 
     /**
@@ -40,5 +41,19 @@ class User extends Authenticatable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'company_details' => 'array'
+    ];
+
+    /**
+     * The model's default values for attributes.
+     *
+     * @var array
+     */
+
+    protected $attributes = [
+        'company_details' => '{
+            "description": "",
+            "image": ""
+        }'
     ];
 }
