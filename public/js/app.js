@@ -2260,7 +2260,6 @@ var Header = function Header(_ref) {
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("header", {
     className: "dashboard-header",
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_3__.Link, {
-      exact: true,
       to: "/dashboard",
       children: "HR-dashboard"
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("span", {
@@ -2277,6 +2276,44 @@ var Header = function Header(_ref) {
 
 /***/ }),
 
+/***/ "./resources/js/components/Nav/Link.jsx":
+/*!**********************************************!*\
+  !*** ./resources/js/components/Nav/Link.jsx ***!
+  \**********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var _Nav_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Nav.scss */ "./resources/js/components/Nav/Nav.scss");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
+
+
+
+var Link = function Link(_ref) {
+  var _ref$exact = _ref.exact,
+      exact = _ref$exact === void 0 ? false : _ref$exact,
+      to = _ref.to,
+      name = _ref.name;
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("li", {
+    className: "nav-link-container",
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_2__.NavLink, {
+      exact: exact,
+      to: to,
+      className: "nav-link",
+      children: name
+    })
+  });
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Link);
+
+/***/ }),
+
 /***/ "./resources/js/components/Nav/index.jsx":
 /*!***********************************************!*\
   !*** ./resources/js/components/Nav/index.jsx ***!
@@ -2289,58 +2326,39 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var _Nav_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Nav.scss */ "./resources/js/components/Nav/Nav.scss");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _Link__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Link */ "./resources/js/components/Nav/Link.jsx");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
 
 
 
 
 
 var Nav = function Nav() {
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("nav", {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("nav", {
     className: "dashboard-nav",
-    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("ul", {
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("ul", {
       className: "nav-links",
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("li", {
-        className: "nav-link-container",
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_2__.NavLink, {
-          exact: true,
-          to: "/dashboard",
-          className: "nav-link",
-          children: "Home"
-        })
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("li", {
-        className: "nav-link-container",
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_2__.NavLink, {
-          exact: true,
-          to: "/dashboard/company-details",
-          className: "nav-link",
-          children: "Company details"
-        })
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("li", {
-        className: "nav-link-container",
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_2__.NavLink, {
-          exact: true,
-          to: "/dashboard/application-form",
-          className: "nav-link",
-          children: "Application form"
-        })
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("li", {
-        className: "nav-link-container",
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_2__.NavLink, {
-          exact: true,
-          to: "/dashboard/positions",
-          className: "nav-link",
-          children: "Open positions"
-        })
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("li", {
-        className: "nav-link-container",
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_2__.NavLink, {
-          exact: true,
-          to: "/dashboard/applications",
-          className: "nav-link",
-          children: "Received applications"
-        })
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_Link__WEBPACK_IMPORTED_MODULE_1__.default, {
+        exact: true,
+        to: "/dashboard",
+        name: "Home"
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_Link__WEBPACK_IMPORTED_MODULE_1__.default, {
+        exact: true,
+        to: "/dashboard/company-details",
+        name: "Company details"
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_Link__WEBPACK_IMPORTED_MODULE_1__.default, {
+        exact: true,
+        to: "/dashboard/application-form",
+        name: "Application form"
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_Link__WEBPACK_IMPORTED_MODULE_1__.default, {
+        exact: true,
+        to: "/dashboard/positions",
+        name: "Open positions"
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_Link__WEBPACK_IMPORTED_MODULE_1__.default, {
+        exact: true,
+        to: "/dashboard/applications",
+        name: "Received applications"
       })]
     })
   });
@@ -2467,7 +2485,8 @@ var CompanyDetails = function CompanyDetails(_ref) {
   var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(''),
       _useState4 = _slicedToArray(_useState3, 2),
       description = _useState4[0],
-      setDescription = _useState4[1];
+      setDescription = _useState4[1]; // Everytime company gets updated set inputs to proper value
+
 
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
     if (company) {
@@ -2476,7 +2495,7 @@ var CompanyDetails = function CompanyDetails(_ref) {
     }
   }, [company]);
 
-  var updateUser = /*#__PURE__*/function () {
+  var handleSubmit = /*#__PURE__*/function () {
     var _ref2 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee(event) {
       var response;
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
@@ -2505,7 +2524,7 @@ var CompanyDetails = function CompanyDetails(_ref) {
       }, _callee);
     }));
 
-    return function updateUser(_x) {
+    return function handleSubmit(_x) {
       return _ref2.apply(this, arguments);
     };
   }();
@@ -2516,7 +2535,7 @@ var CompanyDetails = function CompanyDetails(_ref) {
       children: " Company details "
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("form", {
       className: "pt-2",
-      onSubmit: updateUser,
+      onSubmit: handleSubmit,
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_components_FormGroup__WEBPACK_IMPORTED_MODULE_3__.default, {
         inputValue: companyName,
         setInputValue: setCompanyName,
@@ -2528,7 +2547,7 @@ var CompanyDetails = function CompanyDetails(_ref) {
         setInputValue: setDescription,
         label: "Description",
         placeholder: "Tell us a bit about your company..",
-        note: "Encourage your future employee with a nice description."
+        note: "Encourage your future employees to apply with description."
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("button", {
         type: "submit",
         className: "btn btn-primary",

@@ -6,6 +6,7 @@ const CompanyDetails = ({ company, setCompany }) => {
   const [companyName, setCompanyName] = useState('')
   const [description, setDescription] = useState('')
 
+  // Everytime company gets updated set inputs to proper value
   useEffect(() => {
     if(company) {
       setDescription(company.company_details.description)
@@ -13,7 +14,7 @@ const CompanyDetails = ({ company, setCompany }) => {
     }
   }, [company])
 
-  const updateUser = async (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault()
 
     const response = await axios.post('/api/change_company_details', {
@@ -28,7 +29,7 @@ const CompanyDetails = ({ company, setCompany }) => {
   return (
     <section className='p-4'>
       <h1> Company details </h1>
-      <form className='pt-2' onSubmit={updateUser}>
+      <form className='pt-2' onSubmit={handleSubmit}>
         <FormGroup
           inputValue={companyName}
           setInputValue={setCompanyName}
@@ -42,7 +43,7 @@ const CompanyDetails = ({ company, setCompany }) => {
           setInputValue={setDescription}
           label='Description'
           placeholder='Tell us a bit about your company..'
-          note='Encourage your future employee with a nice description.'
+          note='Encourage your future employees to apply with description.'
         />
 
         <button type="submit" className="btn btn-primary">
