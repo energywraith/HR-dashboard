@@ -37,6 +37,12 @@ Route::middleware('auth:sanctum')->post('/position', [
     'store'
 ]);
 
+// Delete a job position
+Route::middleware('auth:sanctum')->post('/position/delete/{id}', [
+    App\Http\Controllers\JobPositionsController::class,
+    'destroy'
+]);
+
 // Show positions posted by a company
 Route::middleware('auth:sanctum')->get('/positions/{company_id}', [
     App\Http\Controllers\JobPositionsController::class,

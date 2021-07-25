@@ -108,6 +108,8 @@ class JobPositionsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $position = JobPosition::find($id);
+        $position->delete();
+        return response()->json($position->toArray());
     }
 }
