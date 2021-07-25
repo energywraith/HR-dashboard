@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import axios from 'axios'
-import FormGroup from "../../components/FormGroup"
+import FormInputGroup from "../../components/FormInputGroup"
 
 const CompanyDetails = ({ company, setCompany }) => {
   const [companyName, setCompanyName] = useState('')
@@ -9,8 +9,8 @@ const CompanyDetails = ({ company, setCompany }) => {
   // Everytime company gets updated set inputs to proper value
   useEffect(() => {
     if(company) {
-      setDescription(company.company_details.description)
-      setCompanyName(company.name)
+      company.company_details.description && setDescription(company.company_details.description)
+      company.name && setCompanyName(company.name)
     }
   }, [company])
 
@@ -30,7 +30,7 @@ const CompanyDetails = ({ company, setCompany }) => {
     <section className='p-4'>
       <h1> Company details </h1>
       <form className='pt-2' onSubmit={handleSubmit}>
-        <FormGroup
+        <FormInputGroup
           inputValue={companyName}
           setInputValue={setCompanyName}
           label='Company Name'
@@ -38,7 +38,7 @@ const CompanyDetails = ({ company, setCompany }) => {
           note='This name will be seen by applicants.'
         />
 
-        <FormGroup
+        <FormInputGroup
           inputValue={description}
           setInputValue={setDescription}
           label='Description'

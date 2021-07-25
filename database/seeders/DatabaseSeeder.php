@@ -3,6 +3,8 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use Database\Seeders\DB;
+use App\Models\JobPosition;
 
 class DatabaseSeeder extends Seeder
 {
@@ -13,6 +15,13 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // \App\Models\User::factory(10)->create();
+        $position = new JobPosition([
+            'company_id' => 1,
+            'name' => 'Front end developer',
+            'description' => 'Cool job description',
+            'seniority' => 'Junior'
+        ]);
+
+        $position->save();
     }
 }

@@ -23,6 +23,7 @@ class CreateUsersTable extends Migration
             $table->timestamps();
 
             $table->json('company_details');
+            $table->json('application_form');
         });
     }
 

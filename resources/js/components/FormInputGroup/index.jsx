@@ -1,4 +1,4 @@
-const FormGroup = ({ inputValue, setInputValue, label, placeholder, note, className }) => {
+const FormInputGroup = ({ inputValue, setInputValue, label, placeholder, note, className, failedValidation }) => {
   const inputId = label.replace(/\s/g, '').toLowerCase()
 
   return (
@@ -20,4 +20,4 @@ const FormGroup = ({ inputValue, setInputValue, label, placeholder, note, classN
   )
 }
 
-export default FormGroup
+export default FormInputGroup

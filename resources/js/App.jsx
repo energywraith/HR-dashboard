@@ -6,22 +6,22 @@ import './App.scss'
 
 import Dashboard from './layouts/Dashboard';
 import CompanyDetails from './views/CompanyDetails';
+import Positions from './views/Positions';
 
 const App = () => {
-  const [xsrfToken, setXsrfToken] = useState(null)
   const [company, setCompany] = useState(null)
+  const [positions, setPositions] = useState([])
 
   useEffect(() => {
-    const fetch = async () => {
-      const cookie = await axios.get('/sanctum/csrf-cookie')
-      const token = cookie.config.headers['X-XSRF-TOKEN']
-      setXsrfToken(token)
+    const fetchInitData = async () => {
+      const companyResponse = await axios.get('/api/user')
+      setCompany(companyResponse.data)
 
-      const response = await axios.get('/api/user')
-      setCompany(response.data)
+      const positionsResponse = await axios.get(`/api/positions/${companyResponse.data.id}`)
+      setPositions(positionsResponse.data)
     }
 
-    fetch()
+    fetchInitData()
   }, [])
 
   return (
@@ -34,7 +34,7 @@ const App = () => {
           <h1>Application form</h1>
         </Route>
         <Route path='/dashboard/positions'>
-          <h1>Open positions</h1>
+          <Positions company={company} positions={positions} setPositions={setPositions} />
         </Route>
         <Route path='/dashboard/applications'>
           <h1>Received applications</h1>
