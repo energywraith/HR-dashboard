@@ -68,6 +68,7 @@ class JobPosition extends Model
         'salary_range' => '{
             "from": null,
             "to": null,
+            "currency": null
         }',
     ];
 }

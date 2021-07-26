@@ -1,54 +1,38 @@
-import { useState } from "react"
-import axios from "axios"
 import FormInputGroup from "../FormInputGroup"
 import FormSelectGroup from "../FormSelectGroup"
+import FormListGroup from "../FormListGroup"
+import "./AddPositionForm.scss"
+import usePositionFormResource from "../../hooks/usePositionFormResource"
 
 const AddPositionForm = ({ company, positions, setPositions }) => {
-  const [name, setName] = useState('')
-  const [description, setDescription] = useState('')
-  const [seniority, setSeniority] = useState('')
-  const [ validationErrors, setValidationErrors ] = useState({})
-
-  const handleFormSubmit = async (event) => {
-    event.preventDefault()
-
-    const newPosition = {
-      name,
-      description,
-      seniority,
-      company_id: company.id
-    }
-
-    try {
-      const response = await axios.post('/api/position', { ...newPosition })
-      setValidationErrors({})
-      setPositions([ ...positions, response.data ])
-    } catch (error) {
-      let errors = error.response.data.errors
-      setValidationErrors(errors)
-    }
-  }
+  // Had no idea how to handle so many states in one component
+  // I moved states with handleFormSubmit function to usePositionFormResource hook 
+  // to make the component is smaller atleast
+  const { formStates, handleFormSubmit } = usePositionFormResource(company, positions, setPositions)
 
   return (
     <form className='mt-3 p-3 border rounded bg-white d-flex flex-column' onSubmit={handleFormSubmit}>
       <FormInputGroup
-        inputValue={name}
-        setInputValue={setName}
-        label='Job name'
-        placeholder='ex. Google software engineer'
-        note='Let the interested one know he is in the right place'
-        failedValidation={validationErrors.name}
+        setStateValue={formStates.setName}
+        label='Name'
+        placeholder='Google software engineer'
+        note='Let the interested one know he is in the right place.'
+        failedValidation={formStates.validationErrors.name}
       />
       <FormInputGroup
-        inputValue={description}
-        setInputValue={setDescription}
-        label='Job description'
-        placeholder='ex. Google is a...'
-        note='Give your employee a brief description of your company or the position'
-        failedValidation={validationErrors.description}
+        setStateValue={formStates.setDescription}
+        label='Description'
+        placeholder='Google is a...'
+        note='Give your employee a brief description of your company or the position.'
+        failedValidation={formStates.validationErrors.description}
+      />
+      <FormInputGroup
+        setStateValue={formStates.setLocation}
+        label='Location'
+        placeholder='Silicon Valley'
       />
       <FormSelectGroup
-        setValue={setSeniority}
+        setValue={formStates.setSeniority}
         label='Seniority'
         options={[
           'All',
@@ -56,6 +40,46 @@ const AddPositionForm = ({ company, positions, setPositions }) => {
           'Regular',
           'Senior'
         ]}
+      />
+      <div className="row mt-3">
+        <div className="col-2">
+          <FormInputGroup
+            setStateValue={formStates.setSalaryFrom}
+            label='From'
+            placeholder='1500'
+          />
+        </div>
+        <div className="col-2">
+          <FormInputGroup
+            setStateValue={formStates.setSalaryTo}
+            label='To'
+            placeholder='6000'
+          />
+        </div>
+        <div className="col-2">
+          <FormInputGroup
+            setStateValue={formStates.setSalaryCurrency}
+            label='Currency'
+            placeholder='EUR'
+          />
+        </div>
+      </div>
+      <small> siema </small>
+      <FormListGroup
+        setStateList={formStates.setResponsibilities}
+        toggleButtonLabel='Responsibilities'
+      />
+      <FormListGroup
+        setStateList={formStates.setExpectations}
+        toggleButtonLabel='Expectations'
+      />
+      <FormListGroup
+        setStateList={formStates.setNiceToHave}
+        toggleButtonLabel='Nice to have'
+      />
+      <FormListGroup
+        setStateList={formStates.setBenefits}
+        toggleButtonLabel='Benefits'
       />
 
       <button type='submit' className='btn btn-primary mt-5 px-4 align-self-end'> Add </button>

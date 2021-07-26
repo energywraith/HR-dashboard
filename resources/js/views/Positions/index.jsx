@@ -1,6 +1,6 @@
+import axios from "axios"
 import ToggleComponent from "../../components/ToggleComponent"
 import AddPositionForm from '../../components/AddPositionForm'
-import axios from "axios"
 
 const Positions = ({ positions, setPositions, company }) => {
   const deletePosition = async (id) => {
@@ -8,11 +8,14 @@ const Positions = ({ positions, setPositions, company }) => {
     setPositions(positions.filter(position => position.id !== response.data.id))
   }
 
+  console.log(positions)
+
   return (
     <section className='m-4 d-flex flex-column'>
       <ToggleComponent
         buttonLabel='Add position'
-        buttonClassName='btn btn-outline-primary align-self-end'
+        buttonHideLabel='Hide form'
+        buttonClassName='btn btn-primary align-self-end'
       >
         <AddPositionForm company={company} positions={positions} setPositions={setPositions} />
       </ToggleComponent>

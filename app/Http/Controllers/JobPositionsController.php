@@ -39,15 +39,22 @@ class JobPositionsController extends Controller
         $request->validate([
             'name' => 'required',
             'description' => 'required',
+            'company_id' => 'required',
+            'salary_range' => 'nullable',
             'seniority' => 'required',
-            'company_id' => 'required'
         ]);
 
         $new_position = JobPosition::create([
             'name' => $request->name,
             'description' => $request->description,
-            'seniority' => $request->seniority,
+            'location',
             'company_id' => $request->company_id,
+            'salary_range' => $request->salary_range,
+            'seniority' => $request->seniority,
+            'responsibilities' => $request->responsibilities,
+            'expectations' => $request->expectations,
+            'nice_to_have' => $request->nice_to_have,
+            'benefits' => $request->benefits,
         ]);
 
         return response()->json($new_position);

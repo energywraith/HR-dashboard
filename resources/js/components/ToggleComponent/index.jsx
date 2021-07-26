@@ -1,6 +1,6 @@
 import { useState } from "react"
 
-const ToggleComponent = ({ children, buttonLabel, buttonClassName }) => {
+const ToggleComponent = ({ children, buttonLabel, buttonHideLabel, buttonClassName }) => {
   const [visibility, setVisibility] = useState(false)
 
   const toggleVisibility = () => {
@@ -9,7 +9,9 @@ const ToggleComponent = ({ children, buttonLabel, buttonClassName }) => {
 
   return (
     <>
-      <button onClick={toggleVisibility} className={buttonClassName}> {buttonLabel} </button>
+      <button type="button" onClick={toggleVisibility} className={buttonClassName}>
+        {!visibility ? buttonLabel : buttonHideLabel}
+      </button>
       <div style={{ display: visibility ? 'block' : 'none' }}>
         {children}
       </div>
