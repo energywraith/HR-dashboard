@@ -14,8 +14,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Get position data
-Route::get('/position/{id}', [
+// Get position data by hash_url
+Route::middleware('auth:sanctum')->get('/position/{hash_url}', [
+    App\Http\Controllers\JobPositionsController::class,
+    'show_by_hash_url'
+]);
+
+// Get position data by id
+Route::middleware('auth:sanctum')->get('/position/{id}', [
     App\Http\Controllers\JobPositionsController::class,
     'show'
 ]);

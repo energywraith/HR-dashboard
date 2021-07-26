@@ -25,6 +25,7 @@ class JobPosition extends Model
         'benefits',
         'location',
         'salary_range',
+        'hash_url'
     ];
 
     /**
@@ -59,7 +60,6 @@ class JobPosition extends Model
         'expectations' => '[]',
         'nice_to_have' => '[]',
         'benefits' => '[]',
-
         'location' => '{
             "city": null,
             "province": null,

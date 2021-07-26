@@ -22,7 +22,7 @@ const usePositionFormResource = (company, positions, setPositions) => {
       name,
       description,
       location,
-      company_id: company.id,
+      company_id: parseInt(company.id),
       salary_range: {
         from: parseInt(salaryFrom),
         to: parseInt(salaryTo),
@@ -34,6 +34,8 @@ const usePositionFormResource = (company, positions, setPositions) => {
       nice_to_have: niceToHave,
       benefits,
     }
+
+    console.log(newPosition)
 
     try {
       const response = await axios.post('/api/position', { ...newPosition })
@@ -47,6 +49,7 @@ const usePositionFormResource = (company, positions, setPositions) => {
 
   return {
     formStates: {
+      name,
       setName,
       setDescription,
       setLocation,

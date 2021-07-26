@@ -42,29 +42,28 @@ const AddPositionForm = ({ company, positions, setPositions }) => {
         ]}
       />
       <div className="row mt-3">
-        <div className="col-2">
-          <FormInputGroup
-            setStateValue={formStates.setSalaryFrom}
-            label='From'
-            placeholder='1500'
-          />
-        </div>
-        <div className="col-2">
-          <FormInputGroup
-            setStateValue={formStates.setSalaryTo}
-            label='To'
-            placeholder='6000'
-          />
-        </div>
-        <div className="col-2">
-          <FormInputGroup
-            setStateValue={formStates.setSalaryCurrency}
-            label='Currency'
-            placeholder='EUR'
-          />
-        </div>
+        <FormInputGroup
+          setStateValue={formStates.setSalaryFrom}
+          label='From'
+          placeholder='1500'
+          className="col-2 m-0"
+        />
+        <FormInputGroup
+          setStateValue={formStates.setSalaryTo}
+          label='To'
+          placeholder='6000'
+          className="col-2 m-0"
+        />
+        <FormInputGroup
+          setStateValue={formStates.setSalaryCurrency}
+          label='Currency'
+          placeholder='EUR'
+          className="col-2 m-0"
+        />
       </div>
-      <small> siema </small>
+      <small className='form-text text-muted'>
+        If you want undisclosed salary, leave above fields empty.
+      </small>
       <FormListGroup
         setStateList={formStates.setResponsibilities}
         toggleButtonLabel='Responsibilities'

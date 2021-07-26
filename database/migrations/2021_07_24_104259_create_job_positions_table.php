@@ -16,10 +16,11 @@ class CreateJobPositionsTable extends Migration
         Schema::create('job_positions', function (Blueprint $table) {
             $table->id();
             // id of the company that created the job application
-            $table->string('company_id');
+            $table->integer('company_id');
             $table->string('name');
             $table->string('description');
             $table->string('seniority');
+            $table->string('hash_url')->nullable();
             // arrays
             $table->json('responsibilities')->nullable();
             $table->json('expectations')->nullable();

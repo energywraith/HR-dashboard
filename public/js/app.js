@@ -2210,30 +2210,25 @@ var AddPositionForm = function AddPositionForm(_ref) {
       options: ['All', 'Junior', 'Regular', 'Senior']
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
       className: "row mt-3",
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
-        className: "col-2",
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_FormInputGroup__WEBPACK_IMPORTED_MODULE_0__.default, {
-          setStateValue: formStates.setSalaryFrom,
-          label: "From",
-          placeholder: "1500"
-        })
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
-        className: "col-2",
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_FormInputGroup__WEBPACK_IMPORTED_MODULE_0__.default, {
-          setStateValue: formStates.setSalaryTo,
-          label: "To",
-          placeholder: "6000"
-        })
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
-        className: "col-2",
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_FormInputGroup__WEBPACK_IMPORTED_MODULE_0__.default, {
-          setStateValue: formStates.setSalaryCurrency,
-          label: "Currency",
-          placeholder: "EUR"
-        })
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_FormInputGroup__WEBPACK_IMPORTED_MODULE_0__.default, {
+        setStateValue: formStates.setSalaryFrom,
+        label: "From",
+        placeholder: "1500",
+        className: "col-2 m-0"
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_FormInputGroup__WEBPACK_IMPORTED_MODULE_0__.default, {
+        setStateValue: formStates.setSalaryTo,
+        label: "To",
+        placeholder: "6000",
+        className: "col-2 m-0"
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_FormInputGroup__WEBPACK_IMPORTED_MODULE_0__.default, {
+        setStateValue: formStates.setSalaryCurrency,
+        label: "Currency",
+        placeholder: "EUR",
+        className: "col-2 m-0"
       })]
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("small", {
-      children: " siema "
+      className: "form-text text-muted",
+      children: "If you want undisclosed salary, leave above fields empty."
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_FormListGroup__WEBPACK_IMPORTED_MODULE_2__.default, {
       setStateList: formStates.setResponsibilities,
       toggleButtonLabel: "Responsibilities"
@@ -2877,7 +2872,7 @@ var usePositionFormResource = function usePositionFormResource(company, position
                 name: name,
                 description: description,
                 location: location,
-                company_id: company.id,
+                company_id: parseInt(company.id),
                 salary_range: {
                   from: parseInt(salaryFrom),
                   to: parseInt(salaryTo),
@@ -2889,29 +2884,30 @@ var usePositionFormResource = function usePositionFormResource(company, position
                 nice_to_have: niceToHave,
                 benefits: benefits
               };
-              _context.prev = 2;
-              _context.next = 5;
+              console.log(newPosition);
+              _context.prev = 3;
+              _context.next = 6;
               return axios__WEBPACK_IMPORTED_MODULE_2___default().post('/api/position', _objectSpread({}, newPosition));
 
-            case 5:
+            case 6:
               response = _context.sent;
               setValidationErrors({});
               setPositions([].concat(_toConsumableArray(positions), [response.data]));
-              _context.next = 14;
+              _context.next = 15;
               break;
 
-            case 10:
-              _context.prev = 10;
-              _context.t0 = _context["catch"](2);
+            case 11:
+              _context.prev = 11;
+              _context.t0 = _context["catch"](3);
               errors = _context.t0.response.data.errors;
               setValidationErrors(errors);
 
-            case 14:
+            case 15:
             case "end":
               return _context.stop();
           }
         }
-      }, _callee, null, [[2, 10]]);
+      }, _callee, null, [[3, 11]]);
     }));
 
     return function handleFormSubmit(_x) {
@@ -2921,6 +2917,7 @@ var usePositionFormResource = function usePositionFormResource(company, position
 
   return {
     formStates: {
+      name: name,
       setName: setName,
       setDescription: setDescription,
       setLocation: setLocation,
@@ -3203,7 +3200,6 @@ var Positions = function Positions(_ref) {
     };
   }();
 
-  console.log(positions);
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("section", {
     className: "m-4 d-flex flex-column",
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_components_ToggleComponent__WEBPACK_IMPORTED_MODULE_2__.default, {
@@ -3225,6 +3221,11 @@ var Positions = function Positions(_ref) {
           children: position.name
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("li", {
           children: position.description
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("li", {
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("a", {
+            href: "".concat(window.location.origin, "/").concat(position.hash_url),
+            children: " Link "
+          })
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("button", {
           className: "mt-3 btn btn-outline-danger",
           onClick: function onClick() {

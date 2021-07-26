@@ -19,7 +19,8 @@ class DatabaseSeeder extends Seeder
             'company_id' => 1,
             'name' => 'Front end developer',
             'description' => 'Cool job description',
-            'seniority' => 'Junior'
+            'seniority' => 'Junior',
+            'hash_url' => substr(md5(1), 0, 12)
         ]);
 
         $position->save();

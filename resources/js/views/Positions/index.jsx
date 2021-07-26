@@ -8,8 +8,6 @@ const Positions = ({ positions, setPositions, company }) => {
     setPositions(positions.filter(position => position.id !== response.data.id))
   }
 
-  console.log(positions)
-
   return (
     <section className='m-4 d-flex flex-column'>
       <ToggleComponent
@@ -26,6 +24,9 @@ const Positions = ({ positions, setPositions, company }) => {
           .map(position => <ul key={position.id} className='mt-2 p-4 bg-white border rounded'>
             <li className='h3'>{position.name}</li>
             <li>{position.description}</li>
+            <li>
+              <a href={`${window.location.origin}/${position.hash_url}`}> Link </a>
+            </li>
             <button className='mt-3 btn btn-outline-danger' onClick={() => deletePosition(position.id)}> Delete </button>
           </ul>)
       }

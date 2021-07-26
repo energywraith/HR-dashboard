@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\JobPosition;
+use Illuminate\Support\Str;
 
 class JobPositionsController extends Controller
 {
@@ -16,6 +17,21 @@ class JobPositionsController extends Controller
     {
         // $positions = JobPosition::all();
         // return response()->json($positions->toArray());
+    }
+
+    /**
+     * Show the form for sending the application
+     *
+     * @return \Illuminate\Http\Response
+     */
+
+    public function applicationForm($hash_url)
+    {
+        $position = JobPosition::where('hash_url', $hash_url)->get();
+
+        if(count($position) < 1) return view('welcome');
+
+        return view('applicationForm', ['position' => $position[0]]);
     }
 
     /**
@@ -55,10 +71,13 @@ class JobPositionsController extends Controller
             'expectations' => $request->expectations,
             'nice_to_have' => $request->nice_to_have,
             'benefits' => $request->benefits,
+            'hash_url' => Str::random(9)
         ]);
 
         return response()->json($new_position);
     }
+
+    // private function rand_string ()
 
     /**
      * Display the specified resource.
@@ -66,11 +85,11 @@ class JobPositionsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
-    {
-        $position = JobPosition::find($id)->get();
-        return response()->json($position->toArray());
-    }
+    // public function show($id)
+    // {
+    //     $position = JobPosition::find($id)->get();
+    //     return response()->json($position->toArray());
+    // }
 
     /**
      * Display the resources for company
@@ -82,6 +101,23 @@ class JobPositionsController extends Controller
     {
         $positions = JobPosition::where('company_id', $company_id)->get();
         return response()->json($positions->toArray());
+    }
+
+    /**
+     * Display the resource for hash_url
+     *
+     * @param  int  $hash_url
+     * @return \Illuminate\Http\Response
+     */
+    public function show_by_hash_url($hash_url)
+    {
+        $position = JobPosition::where('hash_url', $hash_url)->get();
+
+        if(!$position) {
+            return null;
+        }
+
+        return response()->json($position->toArray());
     }
 
     /**
