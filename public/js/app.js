@@ -2283,7 +2283,8 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 var FormInputGroup = function FormInputGroup(_ref) {
-  var setStateValue = _ref.setStateValue,
+  var stateValue = _ref.stateValue,
+      setStateValue = _ref.setStateValue,
       label = _ref.label,
       placeholder = _ref.placeholder,
       note = _ref.note,
@@ -2296,6 +2297,9 @@ var FormInputGroup = function FormInputGroup(_ref) {
       setInputValue = _useState2[1];
 
   var inputId = label.replace(/\s/g, '').toLowerCase();
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    stateValue && setInputValue(stateValue);
+  }, [stateValue]);
 
   var handleInputChange = function handleInputChange(e) {
     var value = e.target.value;
@@ -3104,22 +3108,20 @@ var CompanyDetails = function CompanyDetails(_ref) {
     };
   }();
 
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("section", {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("section", {
     className: "p-4",
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("h1", {
-      children: " Company details "
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("form", {
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("form", {
       className: "pt-2",
       onSubmit: handleSubmit,
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_components_FormInputGroup__WEBPACK_IMPORTED_MODULE_3__.default, {
-        inputValue: companyName,
-        setInputValue: setCompanyName,
+        stateValue: companyName,
+        setStateValue: setCompanyName,
         label: "Company Name",
         placeholder: "Facebook, google...",
         note: "This name will be seen by applicants."
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_components_FormInputGroup__WEBPACK_IMPORTED_MODULE_3__.default, {
-        inputValue: description,
-        setInputValue: setDescription,
+        stateValue: description,
+        setStateValue: setDescription,
         label: "Description",
         placeholder: "Tell us a bit about your company..",
         note: "Encourage your future employees to apply with description."
@@ -3128,7 +3130,7 @@ var CompanyDetails = function CompanyDetails(_ref) {
         className: "btn btn-primary",
         children: "Submit"
       })]
-    })]
+    })
   });
 };
 

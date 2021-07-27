@@ -28,19 +28,18 @@ const CompanyDetails = ({ company, setCompany }) => {
 
   return (
     <section className='p-4'>
-      <h1> Company details </h1>
       <form className='pt-2' onSubmit={handleSubmit}>
         <FormInputGroup
-          inputValue={companyName}
-          setInputValue={setCompanyName}
+          stateValue={companyName}
+          setStateValue={setCompanyName}
           label='Company Name'
           placeholder='Facebook, google...'
           note='This name will be seen by applicants.'
         />
 
         <FormInputGroup
-          inputValue={description}
-          setInputValue={setDescription}
+          stateValue={description}
+          setStateValue={setDescription}
           label='Description'
           placeholder='Tell us a bit about your company..'
           note='Encourage your future employees to apply with description.'

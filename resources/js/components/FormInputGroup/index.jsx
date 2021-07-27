@@ -1,9 +1,13 @@
 import { useState, useEffect } from "react"
 
-const FormInputGroup = ({ setStateValue, label, placeholder, note, className, failedValidation }) => {
+const FormInputGroup = ({ stateValue, setStateValue, label, placeholder, note, className, failedValidation }) => {
   const [inputValue, setInputValue] = useState('')
   const inputId = label.replace(/\s/g, '').toLowerCase()
 
+  useEffect(() => {
+    stateValue && setInputValue(stateValue)
+  }, [stateValue])
+  
   const handleInputChange = (e) => {
     const value = e.target.value
 
