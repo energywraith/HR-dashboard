@@ -10,7 +10,8 @@
         <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
 
         <!-- React -->
-        <script src="{{ asset('js/app.js') }}" defer></script>
+        <script src="{{ asset('js/landingPage.js') }}" defer></script>
+        <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
         <!-- Styles -->
         <style>
@@ -24,7 +25,7 @@
         </style>
     </head>
     <body class="antialiased">
-        @guest
+        <!-- @guest
             @if (Route::has('login'))
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
@@ -54,6 +55,12 @@
                     Go to dashboard
                 </a>
             </li>
-        @endguest
+        @endguest -->
+        <!-- @guest
+            Not logged in
+        @else 
+
+        @endguest -->
+        <div id="app"></div>
     </body>
 </html>

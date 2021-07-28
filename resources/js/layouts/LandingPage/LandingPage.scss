@@ -1,0 +1,49 @@
+.landing-page-container {
+  background: #232526;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to bottom, #1b1b31, #23233d 50vh, #0f0c29);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to bottom, #1c1646, #18143b 75vh, #18143a); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  position: relative;
+  min-height: 100vh;
+
+  & > nav {
+    position: sticky;
+    top: 0;
+    z-index: 2;
+    -webkit-backdrop-filter: blur(8px) brightness(0.8);
+    backdrop-filter: blur(8px) brightness(0.8);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .brand {
+      font-size: 1.5em;
+      color: white;
+      padding: 1em;
+      font-family: 'Anton', sans-serif;
+      letter-spacing: 1px;
+    }
+
+    .nav-links {
+      margin: 0;
+      list-style: none;
+      display: flex;
+      justify-content: flex-end;
+
+      .nav-link {
+        color: white;
+
+        & > a {
+          display: block;
+          padding: 1em 2em;
+          font-size: 1.1em;
+
+          &:hover {
+            filter: brightness(0.8);
+            color: white;
+            text-decoration: none;
+          }
+        }
+      }
+    }
+  }
+}

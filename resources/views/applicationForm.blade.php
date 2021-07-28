@@ -21,9 +21,6 @@
         </style>
     </head>
     <body class="antialiased">
-        <pre><?php
-          $json_string = json_encode($position, JSON_PRETTY_PRINT);
-          echo print_r($position)
-        ?></pre> 
+        {{ $position->name }}
     </body>
 </html>

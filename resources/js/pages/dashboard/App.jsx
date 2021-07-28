@@ -3,12 +3,10 @@ import axios from 'axios';
 import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
-import Dashboard from './layouts/Dashboard';
-import CompanyDetails from './views/CompanyDetails';
-import ApplicationForm from './views/ApplicationForm';
-import Positions from './views/Positions';
-
-import './App.scss'
+import Dashboard from '../../layouts/Dashboard';
+import CompanyDetails from '../../views/CompanyDetails';
+import ApplicationForm from '../../views/ApplicationForm';
+import Positions from '../../views/Positions';
 
 const App = () => {
   const [company, setCompany] = useState(null)

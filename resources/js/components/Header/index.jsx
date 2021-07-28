@@ -1,29 +1,13 @@
-import { Link } from 'react-router-dom'
 import './Header.scss'
 
-const Header = ({ companyName }) => {
-  const handleLogout = async (event) => {
-    event.preventDefault;
-    try {
-      await axios.post('/logout')
-      window.location.href = '/'
-    } catch (error) {
-      console.log(error)
-    }
-  }
+const Header = ({ text, headingLevel, className }) => {
+  const validHeadingLevels = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'];
+
+  const safeHeading = headingLevel ? headingLevel.toLowerCase() : '';
+  const Title = validHeadingLevels.includes(safeHeading) ? safeHeading : 'p';
 
   return (
-    <header className='dashboard-header'>
-      <Link to='/dashboard'>
-        HR-dashboard
-      </Link>
-      <span>
-        {companyName}
-      </span>
-      <a href='' onClick={handleLogout}>
-        Logout
-      </a>
-    </header>
+    <Title className={`landing-page-header ${className}`}> {text} </Title>
   )
 }
 

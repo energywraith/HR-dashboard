@@ -11,7 +11,7 @@ const AddFieldForm = ({ company, fields, setFields, closeForm }) => {
 
     if (label.length > 0) {
       const newField = {
-        id: fields[fields.length - 1].id + 1,
+        id: fields.length > 0 ? fields[fields.length - 1].id + 1 : 1,
         text: label,
         type,
         removable: true

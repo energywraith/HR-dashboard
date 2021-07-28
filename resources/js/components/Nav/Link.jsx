@@ -1,5 +1,4 @@
 import { NavLink } from 'react-router-dom'
-import './Nav.scss'
 
 const Link = ({ exact = false, to, name }) => {
   return (

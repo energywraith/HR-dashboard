@@ -13,13 +13,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Landing Page
-Route::get('/', function () {
-    return view('welcome');
-});
-
-Auth::routes();
-
 // For the authentication on react app with Sanctum
 Route::post('/tokens/create', function (Request $request) {
     $token = $request->user()->createToken($request->token_name);
@@ -35,3 +28,10 @@ Route::get('/{hash_url}', [
     App\Http\Controllers\JobPositionsController::class,
     'applicationForm'
 ]);
+
+// Landing Page
+Route::get('/{path?}', function () {
+    return view('welcome');
+});
+
+Auth::routes();
