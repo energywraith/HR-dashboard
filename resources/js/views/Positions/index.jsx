@@ -1,8 +1,11 @@
+import { useRef } from 'react';
 import axios from "axios"
 import ToggleComponent from "../../components/ToggleComponent"
 import AddPositionForm from '../../components/AddPositionForm'
 
 const Positions = ({ positions, setPositions, company }) => {
+  const toggleComponentRef = useRef(null)
+
   const deletePosition = async (id) => {
     const response = await axios.post(`/api/position/delete/${id}`)
     setPositions(positions.filter(position => position.id !== response.data.id))
@@ -13,9 +16,15 @@ const Positions = ({ positions, setPositions, company }) => {
       <ToggleComponent
         buttonLabel='Add position'
         buttonHideLabel='Hide form'
-        buttonClassName='btn btn-primary align-self-end'
+        buttonClassName='btn btn-primary border align-self-end'
+        ref={toggleComponentRef}
       >
-        <AddPositionForm company={company} positions={positions} setPositions={setPositions} />
+        <AddPositionForm
+          company={company}
+          positions={positions}
+          setPositions={setPositions}
+          closeForm={() => {toggleComponentRef.current.click()}}
+        />
       </ToggleComponent>
 
       {positions.length > 0 && 

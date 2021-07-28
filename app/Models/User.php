@@ -41,7 +41,7 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
         'company_details' => 'object',
-        'application_form' => 'object',
+        'application_form' => 'array',
     ];
 
     /**
@@ -55,6 +55,18 @@ class User extends Authenticatable
             "description": "",
             "image": ""
         }',
-        'application_form' => '{}',
+        'application_form' => '[
+            { "id": 1, "text": "Full name", "type": "text" },
+            { "id": 2, "text": "Email address", "type": "email" },
+            { "id": 3, "text": "Phone number", "type": "number" },
+            { "id": 4, "text": "CV/Resume", "type": "file" }
+        ]'
     ];
 }
+
+// 'application_form' => '[
+//     ["id" => 1, "text" => "Full name", "type" => "text"],
+//     ["id" => 2, "text" => "Email address", "type" => "email"],
+//     ["id" => 3, "text" => "Phone number", "type" => "number"],
+//     ["id" => 4, "text" => "CV/Resume", "type" => "file"],
+// ]',

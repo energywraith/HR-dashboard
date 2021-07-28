@@ -1,15 +1,15 @@
 import { useEffect } from "react"
 
-const FormSelectGroup = ({ options, label, setValue }) => {
+const FormSelectGroup = ({ options, label, setStateValue }) => {
   const selectId = label.replace(/\s/g, '').toLowerCase()
 
   useEffect(() => {
     // On first render set the output value to the first option
-    setValue(options[0])
+    setStateValue(options[0])
   }, [])
 
   const handleSelectChange = (event) => {
-    setValue(event.target.value)
+    setStateValue(event.target.value)
   }
 
   return (

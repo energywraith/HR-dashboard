@@ -1,6 +1,6 @@
-import { useState } from "react"
+import React, { useState } from "react"
 
-const ToggleComponent = ({ children, buttonLabel, buttonHideLabel, buttonClassName }) => {
+const ToggleComponent = React.forwardRef(({ children, buttonLabel, buttonHideLabel, buttonClassName }, ref) => {
   const [visibility, setVisibility] = useState(false)
 
   const toggleVisibility = () => {
@@ -9,7 +9,7 @@ const ToggleComponent = ({ children, buttonLabel, buttonHideLabel, buttonClassNa
 
   return (
     <>
-      <button type="button" onClick={toggleVisibility} className={buttonClassName}>
+      <button type="button" onClick={toggleVisibility} className={buttonClassName} ref={ref}>
         {!visibility ? buttonLabel : buttonHideLabel}
       </button>
       <div style={{ display: visibility ? 'block' : 'none' }}>
@@ -17,6 +17,6 @@ const ToggleComponent = ({ children, buttonLabel, buttonHideLabel, buttonClassNa
       </div>
     </>
   )
-}
+})
 
 export default ToggleComponent

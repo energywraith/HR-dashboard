@@ -1,28 +1,22 @@
 import { useState, useRef } from "react"
 import ToggleComponent from "../ToggleComponent"
 
-const FormListGroup = ({ toggleButtonLabel, setStateList }) => {
-  const [list, setList] = useState([])
+const FormListGroup = ({ toggleButtonLabel, stateList, setStateList }) => {
   const [input, setInput] = useState('')
-  const inputElementRef = useRef()
+  const inputElementRef = useRef(null)
 
   const handleAddItem = () => {
     const newValue = inputElementRef.current.value
     
-    if (!list.includes(newValue) && newValue !== '') {
-      setList([...list, newValue])
-      setStateList([...list, newValue])
+    if (!stateList.includes(newValue) && newValue !== '') {
+      setStateList([...stateList, newValue])
       setInput('')
     }
   }
 
   const handleDeleteItem = (item) => {
-    list.includes(item) &&
-      setList(list.filter(listItem => listItem !== item))
-
-    if (list.includes(item)) {
-      setList(list.filter(listItem => listItem !== item))
-      setStateList(list.filter(listItem => listItem !== item))
+    if (stateList.includes(item)) {
+      setStateList(stateList.filter(listItem => listItem !== item))
     }
   }
 
@@ -44,7 +38,7 @@ const FormListGroup = ({ toggleButtonLabel, setStateList }) => {
           <button type='button' className='btn btn-success rounded-0' onClick={handleAddItem}> + </button>
         </div>
         <ul>
-          {list.map(item =>
+          {stateList.map(item =>
             <li className='d-flex border-bottom align-items-center'>
               <span className='flex-grow-1 pl-3'> {item} </span>
               <button type='button' className='btn btn-danger rounded-0' onClick={() => handleDeleteItem(item)}> x </button>

@@ -31,7 +31,7 @@ class JobPositionsController extends Controller
 
         if(count($position) < 1) return view('welcome');
 
-        return view('applicationForm', ['position' => $position[0]]);
+        return view('applicationForm', ['position' => $position[0]->toJson(JSON_PRETTY_PRINT)]);
     }
 
     /**

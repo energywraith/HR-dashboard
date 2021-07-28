@@ -1,11 +1,11 @@
 import { useState } from 'react'
 import axios from "axios"
 
-const usePositionFormResource = (company, positions, setPositions) => {
+const usePositionFormResource = (company, positions, setPositions, closeForm) => {
   const [name, setName] = useState('')
   const [description, setDescription] = useState('')
   const [location, setLocation] = useState('')
-  const [seniority, setSeniority] = useState('')
+  const [seniority, setSeniority] = useState('all')
   const [salaryFrom, setSalaryFrom] = useState('')
   const [salaryTo, setSalaryTo] = useState('')
   const [salaryCurrency, setSalaryCurrency] = useState('')
@@ -14,6 +14,20 @@ const usePositionFormResource = (company, positions, setPositions) => {
   const [niceToHave, setNiceToHave] = useState([])
   const [benefits, setBenefits] = useState([])
   const [validationErrors, setValidationErrors] = useState({})
+
+  const clearForm = () => {
+    setName('')
+    setDescription('')
+    setLocation('')
+    setSeniority('all')
+    setSalaryFrom('')
+    setSalaryTo('')
+    setSalaryCurrency('')
+    setResponsibilities([])
+    setExpectations([])
+    setNiceToHave([])
+    setBenefits([])
+  }
 
   const handleFormSubmit = async (event) => {
     event.preventDefault()
@@ -35,12 +49,12 @@ const usePositionFormResource = (company, positions, setPositions) => {
       benefits,
     }
 
-    console.log(newPosition)
-
     try {
       const response = await axios.post('/api/position', { ...newPosition })
       setValidationErrors({})
       setPositions([ ...positions, response.data ])
+      clearForm()
+      closeForm()
     } catch (error) {
       let errors = error.response.data.errors
       setValidationErrors(errors)
@@ -49,14 +63,13 @@ const usePositionFormResource = (company, positions, setPositions) => {
 
   return {
     formStates: {
-      name,
-      setName,
-      setDescription,
-      setLocation,
-      setSeniority,
-      setSalaryFrom,
-      setSalaryTo,
-      setSalaryCurrency,
+      name, setName,
+      description, setDescription,
+      location, setLocation,
+      seniority, setSeniority,
+      salaryFrom, setSalaryFrom,
+      salaryTo, setSalaryTo,
+      salaryCurrency, setSalaryCurrency,
       responsibilities, setResponsibilities,
       expectations, setExpectations,
       niceToHave, setNiceToHave,
