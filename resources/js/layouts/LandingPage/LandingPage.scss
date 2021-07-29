@@ -22,9 +22,9 @@
       font-family: 'Anton', sans-serif;
       letter-spacing: 1px;
       column-gap: 0.5em;
+      text-decoration: none;
 
       & > img {
-        filter: invert(1);
         height: 100%;
         width: 100%;
       }
@@ -52,6 +52,10 @@
             filter: brightness(0.8);
             color: white;
             text-decoration: none;
+          }
+
+          &:active {
+            opacity: 0.8;
           }
         }
       }

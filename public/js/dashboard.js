@@ -2750,7 +2750,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 
 
-
 var Header = function Header(_ref) {
   var companyName = _ref.companyName;
 

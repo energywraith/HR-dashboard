@@ -7,7 +7,8 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title> HR-Dashboard - Where the things happen </title>
+    <link rel="shortcut icon" href="{{ asset('images/brand-image.svg') }}" type="image/x-icon">
 
     <!-- Scripts -->
     <script src="{{ asset('js/dashboard.js') }}" defer></script>

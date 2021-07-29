@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\JobPosition;
+use App\Models\User;
 use Illuminate\Support\Str;
 
 class JobPositionsController extends Controller
@@ -31,7 +32,12 @@ class JobPositionsController extends Controller
 
         if(count($position) < 1) return view('welcome');
 
-        return view('applicationForm', ['position' => $position[0]]);
+        $form_fields = User::where('id', $position[0]->company_id)->get();
+
+        return view('applicationForm', [
+            'position' => $position[0],
+            'form_fields' => $form_fields[0]->application_form
+        ]);
     }
 
     /**

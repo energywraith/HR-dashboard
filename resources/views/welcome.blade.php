@@ -4,7 +4,8 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Laravel</title>
+        <title> HR-Dashboard - Job applications made easy </title>
+        <link rel="shortcut icon" href="{{ asset('images/brand-image.svg') }}" type="image/x-icon">
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
@@ -25,42 +26,6 @@
         </style>
     </head>
     <body class="antialiased">
-        <!-- @guest
-            @if (Route::has('login'))
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                </li>
-            @endif
-
-            @if (Route::has('register'))
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                </li>
-            @endif
-        @else
-            <li class="nav-item dropdown">
-                <a href={{ route('dashboard') }}>
-                    {{ Auth::user()->name }}
-                </a>
-
-                <a href="" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                    Logout
-                </a>
-                
-                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                    @csrf
-                </form>
-
-                <a href={{ route('dashboard') }}>
-                    Go to dashboard
-                </a>
-            </li>
-        @endguest -->
-        <!-- @guest
-            Not logged in
-        @else 
-
-        @endguest -->
         <div id="app"></div>
     </body>
 </html>

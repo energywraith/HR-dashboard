@@ -16,7 +16,6 @@ use Illuminate\Support\Facades\Route;
 // For the authentication on react app with Sanctum
 Route::post('/tokens/create', function (Request $request) {
     $token = $request->user()->createToken($request->token_name);
-
     return ['token' => $token->plainTextToken];
 });
 

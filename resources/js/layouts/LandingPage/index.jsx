@@ -20,10 +20,10 @@ const LandingPage = (props) => {
   return (
     <div className='landing-page-container d-flex flex-column'>
       <nav>
-        <div className='brand d-flex align-items-center px-3'>
+        <Link to='/' className='brand d-flex align-items-center px-3'>
           <img src={BrandImage} alt='HR-Dashboard logo' />
           <span> HR-Dashboard </span>
-        </div>
+        </Link>
         <ul className='nav-links'>
           <li className='nav-link'>
             <Link to='/'> Home </Link>
