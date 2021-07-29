@@ -9,6 +9,7 @@ const LoginForm = ({ formClassName }) => {
 
   const loginHandle = async (event) => {
     event.preventDefault()
+
     try {
       await axios.post('/login', { email: name, password: password })
       window.location.href = '/dashboard'
@@ -30,6 +31,7 @@ const LoginForm = ({ formClassName }) => {
         stateValue={password}
         setStateValue={setPassword}
         failedValidation={validationErrors.password}
+        type='password'
       />
 
       <button type='submit' className='btn btn-primary'> Login </button>

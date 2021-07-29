@@ -28,7 +28,9 @@ Route::middleware('auth:sanctum')->get('/position/{id}', [
 
 // Get user data
 Route::get('/user', function (Request $request) {
-    if ($request->user()) {
+    $user = $request->user();
+
+    if ($user) {
         return $request->user();
     } else {
         return null;

@@ -1,11 +1,11 @@
-import Header from "../../components/DashBoardHeader"
+import DashboardHeader from "../../components/DashboardHeader"
 import Nav from "../../components/Nav"
 import './Dashboard.scss'
 
 const Dashboard = (props) => {
   return (
     <div className='dashboard-container'>
-      <Header />
+      <DashboardHeader />
       <Nav links={[
         { to: '/dashboard', name: 'Home' },
         { to: '/dashboard/company-details', name: 'Company details' },

@@ -1,20 +1,21 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route, Link, Redirect } from 'react-router-dom';
 import LandingPage from '../../layouts/landingPage';
 import Header from '../../components/Header';
 import './App.scss'
-import LoginSection from '../../views/LoginSection';
+import Login from '../../views/Login';
+import Register from '../../views/Register';
 
 const App = () => {
   return (
     <LandingPage>
       <Switch>
         <Route path='/login'>
-          <LoginSection />
+          <Login />
         </Route>
         <Route path='/register'>
-
+          <Register />
         </Route>
         <Route path='/'>
           <section className='d-flex flex-column w-100'>

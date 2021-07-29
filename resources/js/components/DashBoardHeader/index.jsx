@@ -14,9 +14,9 @@ const Header = ({ companyName }) => {
 
   return (
     <header className='dashboard-header'>
-      <Link to='/dashboard'>
+      <a href='/'>
         HR-dashboard
-      </Link>
+      </a>
       <span>
         {companyName}
       </span>

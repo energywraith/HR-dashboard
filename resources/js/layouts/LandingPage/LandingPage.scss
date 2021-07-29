@@ -16,11 +16,22 @@
     align-items: center;
 
     .brand {
-      font-size: 1.5em;
+      height: 2em;
+      width: auto;
       color: white;
-      padding: 1em;
       font-family: 'Anton', sans-serif;
       letter-spacing: 1px;
+      column-gap: 0.5em;
+
+      & > img {
+        filter: invert(1);
+        height: 100%;
+        width: 100%;
+      }
+
+      & > span {
+        white-space: nowrap
+      }
     }
 
     .nav-links {
