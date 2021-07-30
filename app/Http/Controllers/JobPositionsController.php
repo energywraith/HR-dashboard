@@ -21,26 +21,6 @@ class JobPositionsController extends Controller
     }
 
     /**
-     * Show the form for sending the application
-     *
-     * @return \Illuminate\Http\Response
-     */
-
-    public function applicationForm($hash_url)
-    {
-        $position = JobPosition::where('hash_url', $hash_url)->first();
-
-        if(!$position) return view('welcome');
-
-        $form_fields = User::where('id', $position->company_id)->first();
-
-        return view('applicationForm', [
-            'position' => $position,
-            'form_fields' => $form_fields->application_form
-        ]);
-    }
-
-    /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response

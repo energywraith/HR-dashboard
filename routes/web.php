@@ -24,9 +24,14 @@ Route::get('/dashboard/{path?}', [App\Http\Controllers\HomeController::class, 'i
 
 // Application form
 Route::get('/{hash_url}', [
-    App\Http\Controllers\JobPositionsController::class,
-    'applicationForm'
+    App\Http\Controllers\ApplicationController::class,
+    'index'
 ]);
+
+Route::post('/send-application/{company_id}', [
+    App\Http\Controllers\ApplicationController::class,
+    'create'
+])->name('send_application');
 
 // Landing Page
 Route::get('/{path?}', function () {

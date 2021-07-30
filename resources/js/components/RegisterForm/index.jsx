@@ -24,6 +24,8 @@ const RegisterForm = ({ formClassName }) => {
     }
   }
 
+  console.log(validationErrors)
+
   return (
     <form onSubmit={registerHandle} className={formClassName}>
       <FormInputGroup label='Name'
