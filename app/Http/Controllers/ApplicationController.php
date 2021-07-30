@@ -50,14 +50,22 @@ class ApplicationController extends Controller {
       'resume' => 'required|mimes:pdf|max:2048'
     ]);
 
+    // additional_questions
+    foreach($request->toArray() as $key => $value) {
+      if (!in_array($key, ["_token", "name", "email", "number", "resume"])) {
+        $additional_questions[$key] = $value;
+      }
+    }
+
     $new_application = Application::create([
       'company_id' => intval($company_id),
       'name' => $request->name,
       'email' => $request->email,
-      'number' => $request->number
+      'number' => $request->number,
+      'additional_questions' => $additional_questions
     ]);
 
     Storage::putFileAs('resumes', new File($request->resume), $new_application->id.'.pdf');
-    return response()->json($request->toArray());
+    return response()->json($new_application);
   }
 }

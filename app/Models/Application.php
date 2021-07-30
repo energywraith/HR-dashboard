@@ -20,6 +20,7 @@ class Application extends Model
         'number',
         'resume',
         'company_id',
+        'additional_questions'
     ];
 
     /**
