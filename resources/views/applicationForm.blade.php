@@ -49,32 +49,44 @@
                 padding: 1em;
             }
 
-            ul {
+            .header > ul,
+            ul.list {
                 list-style: inside;
+            }
+            
+            .header > ul {
                 column-gap: 1em;
+            }
+
+            .header > ul > li:first-child {
+                list-style: none;
             }
         </style>
     </head>
     <body class="antialiased container p-0">
         <header class='header w-100 text-light p-5'>
             <h1 class='display-3'> {{ $position->name }} </h1>
-            <h2> {{ $position->location }} </h2>
-            <ul class='d-flex flex-column flex-md-row ml-3'>
+            <ul class='d-flex flex-column flex-md-row mt-3'>
+                @if ($position->location)
+                    <li>
+                        <b> Location: </b> {{ $position->location }}
+                    </li>
+                @endif
+                <li>
+                    @if ($position->seniority != 'All')
+                        <b> Seniority: </b> {{ $position->seniority }}
+                    @else
+                        All seniority levels are welcome
+                    @endif
+                </li>
                 <li>
                     @if ($position->salary_range->from)
-                        Salary:
+                        <b> Salary: </b>
                         {{ $position->salary_range->from }} {{ $position->salary_range->currency }}
                         -
                         {{ $position->salary_range->to }} {{ $position->salary_range->currency }}
                     @else
                         Undisclosed salary
-                    @endif
-                </li>
-                <li>
-                    @if ($position->seniority != 'All')
-                        Seniority: {{ $position->seniority }}
-                    @else
-                        All seniority levels are welcome
                     @endif
                 </li>
             </ul>
@@ -86,7 +98,7 @@
 
                 @if ($position->responsibilities)
                     <h3 class='h5 font-weight-bold'> You will be responsible for: </h3>
-                    <ul class='pl-4 py-2'>
+                    <ul class='pl-4 py-2 list'>
                         @foreach ($position->responsibilities as $responsibility)
                             <li> {{ $responsibility }} </li>
                         @endforeach
@@ -95,7 +107,7 @@
 
                 @if ($position->expectations)
                     <h3 class='h5 font-weight-bold pt-3'> We expect you to: </h3>
-                    <ul class='pl-4 py-2'>
+                    <ul class='pl-4 py-2 list'>
                         @foreach ($position->expectations as $expectation)
                             <li> {{ $expectation }} </li>
                         @endforeach
@@ -104,7 +116,7 @@
 
                 @if ($position->nice_to_have)
                     <h3 class='h5 font-weight-bold pt-3'> Nice to have: </h3>
-                    <ul class='pl-4 py-2'>
+                    <ul class='pl-4 py-2 list'>
                         @foreach ($position->nice_to_have as $nice_to_have_item)
                             <li> {{ $nice_to_have_item }} </li>
                         @endforeach
@@ -113,7 +125,7 @@
 
                 @if ($position->benefits)
                     <h3 class='h5 font-weight-bold pt-3'> Benefits: </h3>
-                    <ul class='pl-4 py-2'>
+                    <ul class='pl-4 py-2 list'>
                         @foreach ($position->benefits as $benefit)
                             <li> {{ $benefit }} </li>
                         @endforeach
@@ -125,8 +137,8 @@
                 <form class='col-12 mt-3 p-0 d-flex flex-column'>
                     @foreach ($form_fields as $field)
                         <div class='form-group'>
-                            <label for="{{ $field['text'] }}"> {{ $field['text'] }} </label>
-                            <input type="{{ $field['type'] }}" id="{{ $field['text'] }}" name="{{ $field['text'] }}"
+                            <label for="{{ $field['key'] }}"> {{ $field['label'] }} </label>
+                            <input type="{{ $field['type'] }}" id="{{ $field['key'] }}" name="{{ $field['key'] }}"
                             class="form-control @if ($field['type'] === 'file') p-0 h-100 @endif" />
                         </div>
                     @endforeach

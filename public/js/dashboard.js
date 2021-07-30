@@ -2568,20 +2568,43 @@ var AddFieldForm = function AddFieldForm(_ref) {
       label = _useState4[0],
       setLabel = _useState4[1];
 
+  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({}),
+      _useState6 = _slicedToArray(_useState5, 2),
+      validationErrors = _useState6[0],
+      setValidationErrors = _useState6[1];
+
   var addFieldHandle = function addFieldHandle(event) {
     event.preventDefault();
 
-    if (label.length > 0) {
-      var newField = {
-        id: fields.length > 0 ? fields[fields.length - 1].id + 1 : 1,
-        text: label,
-        type: type,
-        removable: true
-      };
-      setFields([].concat(_toConsumableArray(fields), [newField]));
-      setLabel('');
-      closeForm();
+    if (label.length === 0) {
+      setValidationErrors({
+        label: ['This field cannot be empty']
+      });
+      return;
     }
+
+    var newField = {
+      id: fields.length > 0 ? fields[fields.length - 1].id + 1 : 1,
+      key: label.split(' ').join('_').replace(/[^\w\s]/gi, '').toLowerCase(),
+      label: label,
+      type: type,
+      removable: true
+    }; // When there is already element with the same name
+
+    if (fields.filter(function (field) {
+      return field.key === newField.key;
+    }).length > 0) {
+      setValidationErrors({
+        label: ['This field already exists.']
+      });
+      return;
+    } // Success
+
+
+    setFields([].concat(_toConsumableArray(fields), [newField]));
+    setLabel('');
+    closeForm();
+    setValidationErrors({});
   };
 
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("form", {
@@ -2591,7 +2614,8 @@ var AddFieldForm = function AddFieldForm(_ref) {
       stateValue: label,
       setStateValue: setLabel,
       label: "Field label",
-      placeholder: "When can you start?"
+      placeholder: "When can you start?",
+      failedValidation: validationErrors.label
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_FormSelectGroup__WEBPACK_IMPORTED_MODULE_2__.default, {
       setStateValue: setType,
       label: "Field type",
@@ -3321,7 +3345,7 @@ var SortableList = function SortableList(_ref) {
     return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_Card__WEBPACK_IMPORTED_MODULE_1__.Card, {
       index: index,
       id: card.id,
-      text: card.text,
+      text: card.label,
       moveCard: moveCard,
       removable: card.removable,
       className: cardClassName,

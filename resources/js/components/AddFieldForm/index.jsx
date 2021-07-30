@@ -5,22 +5,35 @@ import FormSelectGroup from "../FormSelectGroup"
 const AddFieldForm = ({ company, fields, setFields, closeForm }) => {
   const [type, setType] = useState('text')
   const [label, setLabel] = useState('')
+  const [validationErrors, setValidationErrors] = useState({})
 
   const addFieldHandle = (event) => {
     event.preventDefault()
 
-    if (label.length > 0) {
-      const newField = {
-        id: fields.length > 0 ? fields[fields.length - 1].id + 1 : 1,
-        text: label,
-        type,
-        removable: true
-      }
-
-      setFields([ ...fields, newField ])
-      setLabel('')
-      closeForm()
+    if (label.length === 0) {
+      setValidationErrors({ label: ['This field cannot be empty']})
+      return
     }
+
+    const newField = {
+      id: fields.length > 0 ? fields[fields.length - 1].id + 1 : 1,
+      key: label.split(' ').join('_').replace(/[^\w\s]/gi, '').toLowerCase(),
+      label,
+      type,
+      removable: true
+    }
+
+    // When there is already element with the same name
+    if (fields.filter(field => field.key === newField.key).length > 0) {
+      setValidationErrors({ label: ['This field already exists.'] })
+      return
+    }
+
+    // Success
+    setFields([ ...fields, newField ])
+    setLabel('')
+    closeForm()
+    setValidationErrors({})
   }
 
   return (
@@ -30,6 +43,7 @@ const AddFieldForm = ({ company, fields, setFields, closeForm }) => {
         setStateValue={setLabel}
         label='Field label'
         placeholder='When can you start?'
+        failedValidation={validationErrors.label}
       />
 
       <FormSelectGroup

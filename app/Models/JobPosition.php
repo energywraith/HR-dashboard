@@ -45,8 +45,7 @@ class JobPosition extends Model
         'expectations' => 'array',
         'nice_to_have' => 'array',
         'benefits' => 'array',
-        'location' => 'object',
-        'salary_range' => 'object',
+        'salary_range' => 'object'
     ];
 
     /**
@@ -60,15 +59,10 @@ class JobPosition extends Model
         'expectations' => '[]',
         'nice_to_have' => '[]',
         'benefits' => '[]',
-        'location' => '{
-            "city": null,
-            "province": null,
-            "country": null,
-        }',
         'salary_range' => '{
             "from": null,
             "to": null,
             "currency": null
-        }',
+        }'
     ];
 }

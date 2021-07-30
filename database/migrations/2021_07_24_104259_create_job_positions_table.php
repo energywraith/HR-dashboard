@@ -20,14 +20,14 @@ class CreateJobPositionsTable extends Migration
             $table->string('name');
             $table->string('description');
             $table->string('seniority');
-            $table->string('hash_url')->nullable();
+            $table->string('location')->nullable();
+            $table->string('hash_url');
             // arrays
             $table->json('responsibilities')->nullable();
             $table->json('expectations')->nullable();
             $table->json('nice_to_have')->nullable();
             $table->json('benefits')->nullable();
             // objects
-            $table->json('location')->nullable(); // city, province, country
             $table->json('salary_range')->nullable(); // from, to
 
             $table->timestamps();

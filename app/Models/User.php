@@ -52,21 +52,13 @@ class User extends Authenticatable
 
     protected $attributes = [
         'company_details' => '{
-            "description": "",
-            "image": ""
+            "description": ""
         }',
         'application_form' => '[
-            { "id": 1, "text": "Full name", "type": "text" },
-            { "id": 2, "text": "Email address", "type": "email" },
-            { "id": 3, "text": "Phone number", "type": "number" },
-            { "id": 4, "text": "CV/Resume", "type": "file" }
+            { "id": 1, "key": "name", "label": "Full name", "type": "text" },
+            { "id": 2, "key": "email", "label": "Email address", "type": "email" },
+            { "id": 3, "key": "number", "label": "Phone number", "type": "number" },
+            { "id": 4, "key": "resume", "label": "CV/Resume", "type": "file" }
         ]'
     ];
 }
-
-// 'application_form' => '[
-//     ["id" => 1, "text" => "Full name", "type" => "text"],
-//     ["id" => 2, "text" => "Email address", "type" => "email"],
-//     ["id" => 3, "text" => "Phone number", "type" => "number"],
-//     ["id" => 4, "text" => "CV/Resume", "type" => "file"],
-// ]',

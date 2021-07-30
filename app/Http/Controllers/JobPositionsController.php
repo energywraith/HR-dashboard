@@ -28,15 +28,15 @@ class JobPositionsController extends Controller
 
     public function applicationForm($hash_url)
     {
-        $position = JobPosition::where('hash_url', $hash_url)->get();
+        $position = JobPosition::where('hash_url', $hash_url)->first();
 
-        if(count($position) < 1) return view('welcome');
+        if(!$position) return view('welcome');
 
-        $form_fields = User::where('id', $position[0]->company_id)->get();
+        $form_fields = User::where('id', $position->company_id)->first();
 
         return view('applicationForm', [
-            'position' => $position[0],
-            'form_fields' => $form_fields[0]->application_form
+            'position' => $position,
+            'form_fields' => $form_fields->application_form
         ]);
     }
 
@@ -69,7 +69,7 @@ class JobPositionsController extends Controller
         $new_position = JobPosition::create([
             'name' => $request->name,
             'description' => $request->description,
-            'location',
+            'location' => $request->location,
             'company_id' => $request->company_id,
             'salary_range' => $request->salary_range,
             'seniority' => $request->seniority,
