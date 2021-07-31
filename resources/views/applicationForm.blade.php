@@ -87,16 +87,22 @@
                     @foreach ($form_fields as $field)
                         <div class='form-group'>
                             <label for="{{ $field['key'] }}"> {{ $field['label'] }} </label>
-                            <input type="{{ $field['type'] }}" id="{{ $field['key'] }}" name="{{ $field['key'] }}"
-                            class="form-control @if ($field['type'] === 'file') p-0 h-100 @endif" >
+                            <input type="{{ $field['type'] }}"
+                            id="{{ $field['key'] }}"
+                            name="{{ $field['key'] }}"
+                            class="form-control @if ($field['type'] === 'file') p-0 h-100 @endif @error($field['key']) is-invalid @enderror"
+                            value="{{ old($field['key']) }}"
+                            >
+                            @error($field['key'])
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
                         </div>
                     @endforeach
                     <button type='submit' class='btn btn-primary align-self-end py-2 px-4 mt-3'> Submit application </button>
                 </form>
             </section>
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
         </main>
     </body>
 </html>

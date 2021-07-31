@@ -74,6 +74,7 @@ class ApplicationController extends Controller {
     ]);
 
     Storage::putFileAs('resumes', new File($request->resume), $new_application->id.'.pdf');
-    return response()->json($new_application);
+    // return response()->json($new_application);
+    return view("success", ['position' => json_decode($request->position)->name]);
   }
 }
