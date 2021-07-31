@@ -40,9 +40,8 @@ class ApplicationController extends Controller {
     *
     * @param  \Illuminate\Http\Request  $request
     * @return \Illuminate\Http\Response
-    * @param  integer  $company_id
    */
-  public function create(Request $request, $company_id) {
+  public function create(Request $request) {
     $request->validate([
       'name' => 'required',
       'email' => 'required',
@@ -51,14 +50,16 @@ class ApplicationController extends Controller {
     ]);
 
     // additional_questions
+    $additional_questions = [];
     foreach($request->toArray() as $key => $value) {
-      if (!in_array($key, ["_token", "name", "email", "number", "resume"])) {
+      if (!in_array($key, ["_token", "name", "email", "number", "resume", "position"])) {
         $additional_questions[$key] = $value;
       }
     }
 
     $new_application = Application::create([
-      'company_id' => intval($company_id),
+      'company_id' => intval(json_decode($request->position)->company_id),
+      'position_id' => json_decode($request->position)->id,
       'name' => $request->name,
       'email' => $request->email,
       'number' => $request->number,

@@ -28,7 +28,7 @@ Route::get('/{hash_url}', [
     'index'
 ]);
 
-Route::post('/send-application/{company_id}', [
+Route::post('/send-application', [
     App\Http\Controllers\ApplicationController::class,
     'create'
 ])->name('send_application');

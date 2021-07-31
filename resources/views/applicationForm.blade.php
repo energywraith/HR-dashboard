@@ -81,8 +81,9 @@
             </section>
             <section class='pt-4 d-flex flex-column'>
                 <h3 class='h2 font-weight-bold'> Apply now! </h3>
-                <form method="POST" enctype="multipart/form-data" action="{{ route('send_application', [ $company_id ]) }}" class='col-12 mt-3 p-0 d-flex flex-column'>
+                <form method="POST" enctype="multipart/form-data" action="{{ route('send_application') }}" class='col-12 mt-3 p-0 d-flex flex-column'>
                     @csrf
+                    <input type="hidden" name="position" value="{{ $position }}" />
                     @foreach ($form_fields as $field)
                         <div class='form-group'>
                             <label for="{{ $field['key'] }}"> {{ $field['label'] }} </label>
