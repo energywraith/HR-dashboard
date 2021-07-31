@@ -29,7 +29,7 @@ class Application extends Model
      *
      * @var array
      */
-    protected $hidden = [];
+    protected $hidden = ['resume'];
 
     /**
      * The attributes that should be cast to native types.

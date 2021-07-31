@@ -7,11 +7,13 @@ import Dashboard from '../../layouts/Dashboard';
 import CompanyDetails from '../../views/CompanyDetails';
 import ApplicationForm from '../../views/ApplicationForm';
 import Positions from '../../views/Positions';
+import Applications from '../../views/Applications';
 
 const App = () => {
   const [company, setCompany] = useState(null)
   const [positions, setPositions] = useState([])
   const [formFields, setFormFields] = useState([])
+  const [applications, setApplications] = useState([])
 
   useEffect(() => {
     const fetchInitData = async () => {
@@ -21,6 +23,9 @@ const App = () => {
 
       const positionsResponse = await axios.get(`/api/positions/${companyResponse.data.id}`)
       setPositions(positionsResponse.data)
+
+      const applicationsResponse = await axios.get(`/api/applications/${companyResponse.data.id}`,)
+      setApplications(applicationsResponse.data)
     }
 
     fetchInitData()
@@ -39,7 +44,7 @@ const App = () => {
           <Positions company={company} positions={positions} setPositions={setPositions} />
         </Route>
         <Route path='/dashboard/applications'>
-          <h1>Received applications</h1>
+          <Applications applications={applications} positions={positions} />
         </Route>
         <Route path='/dashboard/' exact>
           <h1> Hello {company && company.name} </h1>

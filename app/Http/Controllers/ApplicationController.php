@@ -12,6 +12,7 @@ class ApplicationController extends Controller {
 
   /**
    * Show the form for sending the application
+   * 
    * @param  string  $hash_url
    * @return \Illuminate\Http\Response
    */
@@ -29,10 +30,16 @@ class ApplicationController extends Controller {
       ]);
   }
 
-  // applications list
+  /**
+   * Return application that were sent to a company
+   * 
+   * @param  string  $id
+   * @return \Illuminate\Http\Response
+   */
+  public function show_by_company($id) {
+    $applications = Application::where('company_id', $id)->get();
 
-  public function show_by_company(Request $request, $company_id) {
-    return response()->json($request);
+    return response()->json($applications);
   }
 
   /**
@@ -44,15 +51,15 @@ class ApplicationController extends Controller {
   public function create(Request $request) {
     $request->validate([
       'name' => 'required',
-      'email' => 'required',
-      'number' => 'required',
+      'email' => 'required|email',
+      'number' => 'required|numeric',
       'resume' => 'required|mimes:pdf|max:2048'
     ]);
 
     // additional_questions
     $additional_questions = [];
     foreach($request->toArray() as $key => $value) {
-      if (!in_array($key, ["_token", "name", "email", "number", "resume", "position"])) {
+      if (!in_array($key, ["_token", "position", "name", "email", "number", "resume"])) {
         $additional_questions[$key] = $value;
       }
     }

@@ -13,17 +13,6 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-// Get position data by hash_url
-Route::middleware('auth:sanctum')->get('/position/{hash_url}', [
-    App\Http\Controllers\JobPositionsController::class,
-    'show_by_hash_url'
-]);
-
-// Get position data by id
-Route::middleware('auth:sanctum')->get('/position/{id}', [
-    App\Http\Controllers\JobPositionsController::class,
-    'show'
-]);
 
 // Get user data
 Route::get('/user', function (Request $request) {
@@ -42,6 +31,18 @@ Route::middleware('auth:sanctum')->post('/change_company_details', [
     'update_user'
 ]);
 
+// Get position data by hash_url
+Route::middleware('auth:sanctum')->get('/position/{hash_url}', [
+    App\Http\Controllers\JobPositionsController::class,
+    'show_by_hash_url'
+]);
+
+// Show positions posted by a company
+Route::middleware('auth:sanctum')->get('/positions/{company_id}', [
+    App\Http\Controllers\JobPositionsController::class,
+    'show_by_company'
+]);
+
 // Create a job position
 Route::middleware('auth:sanctum')->post('/position', [
     App\Http\Controllers\JobPositionsController::class,
@@ -54,8 +55,14 @@ Route::middleware('auth:sanctum')->post('/position/delete/{id}', [
     'destroy'
 ]);
 
-// Show positions posted by a company
-Route::middleware('auth:sanctum')->get('/positions/{company_id}', [
-    App\Http\Controllers\JobPositionsController::class,
+// Get applications for company
+Route::middleware('auth:sanctum')->get('/applications/{id}', [
+    App\Http\Controllers\ApplicationController::class,
     'show_by_company'
+]);
+
+// Get resume
+Route::middleware('auth:sanctum')->get('/resume/{id}', [
+    App\Http\Controllers\ResumesController::class,
+    'view'
 ]);
