@@ -1,0 +1,16 @@
+.landing-page {
+  background: url('./wave.svg') no-repeat;
+  background-position: center calc(100% + 1px);
+  padding-bottom: 15em;
+
+  @media(max-width: 992px) {
+    & > div {
+      text-align: center; 
+      align-items: center;
+    }
+  }
+
+  @media(min-width: 992px) {
+    min-height: 100vh;
+  }
+}

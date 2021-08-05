@@ -1,69 +1,65 @@
 .landing-page-container {
-  background: #232526;  /* fallback for old browsers */
-  background: -webkit-linear-gradient(to bottom, #1b1b31, #23233d 50vh, #0f0c29);  /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(to bottom, #1c1646, #18143b 75vh, #18143a); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background: #261d5c;
   position: relative;
   min-height: 100vh;
 
-  & > nav {
+  & > div {
     position: sticky;
     top: 0;
     z-index: 2;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
 
-    -webkit-backdrop-filter: blur(8px) brightness(0.8);
-    backdrop-filter: blur(8px) brightness(0.8);
-    background-color: #0f0c29;
-    // Mozilla
-    @supports ((-webkit-backdrop-filter: blur(8px) brightness(0.8)) or (backdrop-filter: blur(8px) brightness(0.8))) {
-      background-color: transparent;
-    }
-
-    .brand {
-      height: 2em;
-      width: auto;
-      color: white;
-      font-family: 'Anton', sans-serif;
-      letter-spacing: 1px;
-      column-gap: 0.5em;
-      text-decoration: none;
-
-      & > img {
-        height: 100%;
-        width: 100%;
-      }
-
-      & > span {
-        white-space: nowrap
+    &.scrolled {
+      -webkit-backdrop-filter: blur(8px) brightness(0.8);
+      backdrop-filter: blur(8px) brightness(0.8);
+      background-color: #0f0c29;
+      // Mozilla
+      @supports ((-webkit-backdrop-filter: blur(8px) brightness(0.8)) or (backdrop-filter: blur(8px) brightness(0.8))) {
+        background-color: transparent;
       }
     }
 
-    .nav-links {
-      margin: 0;
-      list-style: none;
-      display: flex;
-      justify-content: flex-end;
+    .navbar {
+      transition: background-color 300ms;
+
+      .brand {
+        height: 2em;
+        column-gap: 0.5em;
+        font-family: 'Anton', sans-serif;
+
+        & > img {
+          height: 100%;
+          width: 100%;
+        }
+  
+        & > span {
+          white-space: nowrap
+        }
+      }
 
       .nav-link {
-        color: white;
+        display: block;
+        padding: 1em 2em;
 
-        & > a {
-          display: block;
-          padding: 1em 2em;
-          font-size: 1.1em;
+        &:not(.active):hover {
+          filter: brightness(0.8);
+          color: white;
+          text-decoration: none;
+        }
 
-          &:hover {
-            filter: brightness(0.8);
-            color: white;
-            text-decoration: none;
-          }
+        @media (min-width: 992px) {
+          background: linear-gradient(0deg, white, white) bottom center no-repeat;
+          transition: background-size 300ms;
+          background-size: 0% 3px;
+          background-position: center bottom;
 
-          &:active {
-            opacity: 0.8;
+          &.active {
+            background-size: 100% 3px;
           }
         }
+      }
+
+      @media(max-width: 992px) {
+        width: 100% !important;
       }
     }
   }

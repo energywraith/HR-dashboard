@@ -2417,6 +2417,78 @@ var useRedirectIfLoggedIn = function useRedirectIfLoggedIn() {
 
 /***/ }),
 
+/***/ "./resources/js/hooks/useScrollPosition.js":
+/*!*************************************************!*\
+  !*** ./resources/js/hooks/useScrollPosition.js ***!
+  \*************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "useScrollPosition": () => (/* binding */ useScrollPosition)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+
+var isBrowser = typeof window !== "undefined";
+
+function getScrollPosition(_ref) {
+  var element = _ref.element,
+      useWindow = _ref.useWindow;
+  if (!isBrowser) return {
+    x: 0,
+    y: 0
+  };
+  var target = element ? element.current : document.body;
+  var position = target.getBoundingClientRect();
+  return useWindow ? {
+    x: window.scrollX,
+    y: window.scrollY
+  } : {
+    x: position.left,
+    y: position.top
+  };
+}
+
+function useScrollPosition(effect, deps, element, useWindow, wait) {
+  var position = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(getScrollPosition({
+    useWindow: useWindow
+  }));
+  var throttleTimeout = null;
+
+  var callBack = function callBack() {
+    var currPos = getScrollPosition({
+      element: element,
+      useWindow: useWindow
+    });
+    effect({
+      prevPos: position.current,
+      currPos: currPos
+    });
+    position.current = currPos;
+    throttleTimeout = null;
+  };
+
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useLayoutEffect)(function () {
+    var handleScroll = function handleScroll() {
+      if (wait) {
+        if (throttleTimeout === null) {
+          throttleTimeout = setTimeout(callBack, wait);
+        }
+      } else {
+        callBack();
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return function () {
+      return window.removeEventListener('scroll', handleScroll);
+    };
+  }, deps);
+}
+
+/***/ }),
+
 /***/ "./resources/js/layouts/FormSection/index.jsx":
 /*!****************************************************!*\
   !*** ./resources/js/layouts/FormSection/index.jsx ***!
@@ -2475,10 +2547,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
-/* harmony import */ var _LandingPage_scss__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./LandingPage.scss */ "./resources/js/layouts/landingPage/LandingPage.scss");
-/* harmony import */ var _images_brand_image_svg__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./images/brand-image.svg */ "./resources/js/layouts/landingPage/images/brand-image.svg");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var _hooks_useScrollPosition__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../hooks/useScrollPosition */ "./resources/js/hooks/useScrollPosition.js");
+/* harmony import */ var _LandingPage_scss__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./LandingPage.scss */ "./resources/js/layouts/landingPage/LandingPage.scss");
+/* harmony import */ var _images_brand_image_svg__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./images/brand-image.svg */ "./resources/js/layouts/landingPage/images/brand-image.svg");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -2505,15 +2578,27 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
+
 var LandingPage = function LandingPage(props) {
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(null),
       _useState2 = _slicedToArray(_useState, 2),
       user = _useState2[0],
       setUser = _useState2[1];
 
+  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(null),
+      _useState4 = _slicedToArray(_useState3, 2),
+      navScrolled = _useState4[0],
+      setNavScrolled = _useState4[1];
+
+  (0,_hooks_useScrollPosition__WEBPACK_IMPORTED_MODULE_2__.useScrollPosition)(function (_ref) {
+    var prevPos = _ref.prevPos,
+        currPos = _ref.currPos;
+    var isPageScrolled = currPos.y < 0;
+    setNavScrolled(isPageScrolled);
+  }, [navScrolled]);
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
     var checkIfUserIsLoggedIn = /*#__PURE__*/function () {
-      var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
+      var _ref2 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
         var response;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
           while (1) {
@@ -2538,55 +2623,84 @@ var LandingPage = function LandingPage(props) {
       }));
 
       return function checkIfUserIsLoggedIn() {
-        return _ref.apply(this, arguments);
+        return _ref2.apply(this, arguments);
       };
     }();
 
     checkIfUserIsLoggedIn();
   }, []);
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
     className: "landing-page-container d-flex flex-column",
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("nav", {
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)(react_router_dom__WEBPACK_IMPORTED_MODULE_5__.Link, {
-        to: "/",
-        className: "brand d-flex align-items-center px-3",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("img", {
-          src: _images_brand_image_svg__WEBPACK_IMPORTED_MODULE_3__.default,
-          alt: "HR-Dashboard logo"
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("span", {
-          children: " HR-Dashboard "
-        })]
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("ul", {
-        className: "nav-links",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("li", {
-          className: "nav-link",
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_5__.Link, {
-            to: "/",
-            children: " Home "
-          })
-        }), !user ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.Fragment, {
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("li", {
-            className: "nav-link",
-            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_5__.Link, {
-              to: "/register",
-              children: " Register "
-            })
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("li", {
-            className: "nav-link",
-            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_5__.Link, {
-              to: "/login",
-              children: " Login "
-            })
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
+      className: "w-100 d-flex justify-content-center ".concat(navScrolled && 'scrolled'),
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("nav", {
+        className: "w-75 align-self-center navbar navbar-expand-lg navbar-dark",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)(react_router_dom__WEBPACK_IMPORTED_MODULE_6__.NavLink, {
+          to: "/",
+          className: "brand navbar-brand d-flex align-items-center",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("img", {
+            src: _images_brand_image_svg__WEBPACK_IMPORTED_MODULE_4__.default,
+            alt: "HR-Dashboard logo"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("span", {
+            children: " HR-Dashboard "
           })]
-        }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("li", {
-          className: "nav-link",
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("a", {
-            href: "/dashboard",
-            children: " Go to dashboard "
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("button", {
+          className: "navbar-toggler",
+          type: "button",
+          "data-toggle": "collapse",
+          "data-target": "#navbarNavAltMarkup",
+          "aria-controls": "navbarNavAltMarkup",
+          "aria-expanded": "false",
+          "aria-label": "Toggle navigation",
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("span", {
+            className: "navbar-toggler-icon"
+          })
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
+          className: "collapse navbar-collapse d-lg-flex justify-content-lg-end",
+          id: "navbarNavAltMarkup",
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("ul", {
+            className: "navbar-nav",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("li", {
+              className: "nav-item",
+              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_6__.NavLink, {
+                className: "nav-link",
+                exact: true,
+                to: "/",
+                activeClassName: "active",
+                children: " Home "
+              })
+            }), !user ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.Fragment, {
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("li", {
+                className: "nav-item ml-lg-3",
+                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_6__.NavLink, {
+                  className: "nav-link",
+                  exact: true,
+                  to: "/register",
+                  activeClassName: "active",
+                  children: " Register "
+                })
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("li", {
+                className: "nav-item ml-lg-3",
+                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_6__.NavLink, {
+                  className: "nav-link",
+                  exact: true,
+                  to: "/login",
+                  activeClassName: "active",
+                  children: " Login "
+                })
+              })]
+            }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("li", {
+              className: "nav-item ml-lg-3",
+              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("a", {
+                className: "nav-link",
+                href: "/dashboard",
+                children: " Go to dashboard "
+              })
+            })]
           })
         })]
-      })]
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("main", {
+      })
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("main", {
       className: "d-flex flex-grow-1",
       children: props.children
     })]
@@ -2668,27 +2782,49 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var _components_Header__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../components/Header */ "./resources/js/components/Header/index.jsx");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _cv_svg__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./cv.svg */ "./resources/js/views/LandingPageHome/cv.svg");
+/* harmony import */ var _LandingPageHome_scss__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./LandingPageHome.scss */ "./resources/js/views/LandingPageHome/LandingPageHome.scss");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
+
 
 
 
 
 var LandingPageHome = function LandingPageHome() {
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("section", {
-    className: "d-flex flex-column w-100",
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(_components_Header__WEBPACK_IMPORTED_MODULE_0__.default, {
-      headingLevel: "h1",
-      text: "Managing job applications has become much easier.",
-      className: "p-5 display-4 text-light text-center align-self-center"
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
-      className: "main-buttons d-flex align-self-center mt-1",
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("button", {
-        className: "btn btn-lg get-started",
-        children: " Get started "
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("button", {
-        className: "btn btn-lg user",
-        children: " Im user "
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+    className: "d-flex flex-column",
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("section", {
+      className: "landing-page w-100 d-flex flex-column flex-lg-row align-items-center justify-content-center flex-grow-1",
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+        className: "col-lg-6 d-flex flex-column p-5 p-lg-0",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_components_Header__WEBPACK_IMPORTED_MODULE_0__.default, {
+          headingLevel: "h1",
+          text: "Managing job applications has become much easier.",
+          className: "display-4 text-light font-weight-bold"
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
+          className: "text-light mt-4 h5",
+          children: "HR-Dashboard is an company app where you can create application forms, manage job positions and applications."
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+          className: "d-flex justify-content-start mt-4",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
+            className: "btn btn-outline-primary px-4 py-2",
+            children: "Log in"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
+            className: "btn btn-primary px-4 py-2 ml-3",
+            children: "Get started"
+          })]
+        })]
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("img", {
+        src: _cv_svg__WEBPACK_IMPORTED_MODULE_1__.default,
+        alt: "managing resumes",
+        className: "pt-lg-0 pt-5 col-lg-3 w-50"
       })]
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("section", {
+      className: "vh-100",
+      style: {
+        background: '#18143b'
+      }
     })]
   });
 };
@@ -7261,7 +7397,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".landing-page-container {\n  background: #232526;\n  /* fallback for old browsers */\n  /* Chrome 10-25, Safari 5.1-6 */\n  background: linear-gradient(to bottom, #1c1646, #18143b 75vh, #18143a);\n  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */\n  position: relative;\n  min-height: 100vh;\n}\n.landing-page-container > nav {\n  position: sticky;\n  top: 0;\n  z-index: 2;\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  -webkit-backdrop-filter: blur(8px) brightness(0.8);\n  backdrop-filter: blur(8px) brightness(0.8);\n  background-color: #0f0c29;\n}\n@supports ((-webkit-backdrop-filter: blur(8px) brightness(0.8)) or (backdrop-filter: blur(8px) brightness(0.8))) {\n  .landing-page-container > nav {\n    background-color: transparent;\n  }\n}\n.landing-page-container > nav .brand {\n  height: 2em;\n  width: auto;\n  color: white;\n  font-family: \"Anton\", sans-serif;\n  letter-spacing: 1px;\n  -moz-column-gap: 0.5em;\n       column-gap: 0.5em;\n  text-decoration: none;\n}\n.landing-page-container > nav .brand > img {\n  height: 100%;\n  width: 100%;\n}\n.landing-page-container > nav .brand > span {\n  white-space: nowrap;\n}\n.landing-page-container > nav .nav-links {\n  margin: 0;\n  list-style: none;\n  display: flex;\n  justify-content: flex-end;\n}\n.landing-page-container > nav .nav-links .nav-link {\n  color: white;\n}\n.landing-page-container > nav .nav-links .nav-link > a {\n  display: block;\n  padding: 1em 2em;\n  font-size: 1.1em;\n}\n.landing-page-container > nav .nav-links .nav-link > a:hover {\n  filter: brightness(0.8);\n  color: white;\n  text-decoration: none;\n}\n.landing-page-container > nav .nav-links .nav-link > a:active {\n  opacity: 0.8;\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".landing-page-container {\n  background: #261d5c;\n  position: relative;\n  min-height: 100vh;\n}\n.landing-page-container > div {\n  position: sticky;\n  top: 0;\n  z-index: 2;\n}\n.landing-page-container > div.scrolled {\n  -webkit-backdrop-filter: blur(8px) brightness(0.8);\n  backdrop-filter: blur(8px) brightness(0.8);\n  background-color: #0f0c29;\n}\n@supports ((-webkit-backdrop-filter: blur(8px) brightness(0.8)) or (backdrop-filter: blur(8px) brightness(0.8))) {\n  .landing-page-container > div.scrolled {\n    background-color: transparent;\n  }\n}\n.landing-page-container > div .navbar {\n  transition: background-color 300ms;\n}\n.landing-page-container > div .navbar .brand {\n  height: 2em;\n  -moz-column-gap: 0.5em;\n       column-gap: 0.5em;\n  font-family: \"Anton\", sans-serif;\n}\n.landing-page-container > div .navbar .brand > img {\n  height: 100%;\n  width: 100%;\n}\n.landing-page-container > div .navbar .brand > span {\n  white-space: nowrap;\n}\n.landing-page-container > div .navbar .nav-link {\n  display: block;\n  padding: 1em 2em;\n}\n.landing-page-container > div .navbar .nav-link:not(.active):hover {\n  filter: brightness(0.8);\n  color: white;\n  text-decoration: none;\n}\n@media (min-width: 992px) {\n  .landing-page-container > div .navbar .nav-link {\n    background: linear-gradient(0deg, white, white) bottom center no-repeat;\n    transition: background-size 300ms;\n    background-size: 0% 3px;\n    background-position: center bottom;\n  }\n  .landing-page-container > div .navbar .nav-link.active {\n    background-size: 100% 3px;\n  }\n}\n@media (max-width: 992px) {\n  .landing-page-container > div .navbar {\n    width: 100% !important;\n  }\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -7284,9 +7420,38 @@ __webpack_require__.r(__webpack_exports__);
 // Imports
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
-___CSS_LOADER_EXPORT___.push([module.id, "@import url(https://fonts.googleapis.com/css2?family=Oswald&display=swap);"]);
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".main-header {\n  max-width: 25ch;\n  width: -webkit-fit-content;\n  width: -moz-fit-content;\n  width: fit-content;\n  font-family: \"Anton\", sans-serif;\n  font-weight: 600;\n}\n\n.main-buttons {\n  -moz-column-gap: 1em;\n       column-gap: 1em;\n}\n.main-buttons > button {\n  font-family: \"Anton\", sans-serif;\n  font-weight: 600;\n  font-size: 1.5em;\n  padding: 0.5em 2em;\n  text-shadow: 0px 0px 1px black;\n  text-align: center;\n  transition: background-position 0.5s;\n  background-size: 200% auto;\n  color: white;\n  border-radius: 10px;\n  display: block;\n}\n.main-buttons > button.get-started {\n  background-image: linear-gradient(to right, #005C97 0%, #363795 51%, #005C97 100%);\n}\n.main-buttons > button.user {\n  background-image: linear-gradient(to right, green, #045f04);\n}\n.main-buttons > button:hover {\n  background-position: right center;\n  /* change the direction of the change here */\n  color: #fff;\n  text-decoration: none;\n}\n.main-buttons > button:focus {\n  outline: white;\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "body {\n  overflow-y: scroll;\n}", ""]);
+// Exports
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[8].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[8].oneOf[1].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[8].oneOf[1].use[3]!./resources/js/views/LandingPageHome/LandingPageHome.scss":
+/*!*******************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[8].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[8].oneOf[1].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[8].oneOf[1].use[3]!./resources/js/views/LandingPageHome/LandingPageHome.scss ***!
+  \*******************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../node_modules/css-loader/dist/runtime/getUrl.js */ "./node_modules/css-loader/dist/runtime/getUrl.js");
+/* harmony import */ var _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _wave_svg__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./wave.svg */ "./resources/js/views/LandingPageHome/wave.svg");
+// Imports
+
+
+
+var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
+var ___CSS_LOADER_URL_REPLACEMENT_0___ = _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_1___default()(_wave_svg__WEBPACK_IMPORTED_MODULE_2__.default);
+// Module
+___CSS_LOADER_EXPORT___.push([module.id, ".landing-page {\n  background: url(" + ___CSS_LOADER_URL_REPLACEMENT_0___ + ") no-repeat;\n  background-position: center calc(100% + 1px);\n  padding-bottom: 15em;\n}\n@media (max-width: 992px) {\n  .landing-page > div {\n    text-align: center;\n    align-items: center;\n  }\n}\n@media (min-width: 992px) {\n  .landing-page {\n    min-height: 100vh;\n  }\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -7369,6 +7534,50 @@ module.exports = function (cssWithMappingToString) {
 
 /***/ }),
 
+/***/ "./node_modules/css-loader/dist/runtime/getUrl.js":
+/*!********************************************************!*\
+  !*** ./node_modules/css-loader/dist/runtime/getUrl.js ***!
+  \********************************************************/
+/***/ ((module) => {
+
+"use strict";
+
+
+module.exports = function (url, options) {
+  if (!options) {
+    // eslint-disable-next-line no-param-reassign
+    options = {};
+  } // eslint-disable-next-line no-underscore-dangle, no-param-reassign
+
+
+  url = url && url.__esModule ? url.default : url;
+
+  if (typeof url !== "string") {
+    return url;
+  } // If url is already wrapped in quotes, remove them
+
+
+  if (/^['"].*['"]$/.test(url)) {
+    // eslint-disable-next-line no-param-reassign
+    url = url.slice(1, -1);
+  }
+
+  if (options.hash) {
+    // eslint-disable-next-line no-param-reassign
+    url += options.hash;
+  } // Should url be wrapped?
+  // See https://drafts.csswg.org/css-values-3/#urls
+
+
+  if (/["'() \t\n]/.test(url) || options.needQuotes) {
+    return "\"".concat(url.replace(/"/g, '\\"').replace(/\n/g, "\\n"), "\"");
+  }
+
+  return url;
+};
+
+/***/ }),
+
 /***/ "./resources/js/layouts/landingPage/images/brand-image.svg":
 /*!*****************************************************************!*\
   !*** ./resources/js/layouts/landingPage/images/brand-image.svg ***!
@@ -7381,6 +7590,36 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("/images/brand-image.svg?1c1525ac84ebfb5e90282c94663037d9");
+
+/***/ }),
+
+/***/ "./resources/js/views/LandingPageHome/cv.svg":
+/*!***************************************************!*\
+  !*** ./resources/js/views/LandingPageHome/cv.svg ***!
+  \***************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("/images/cv.svg?33ee4347aec2dc91f9888cb0a61ff7ef");
+
+/***/ }),
+
+/***/ "./resources/js/views/LandingPageHome/wave.svg":
+/*!*****************************************************!*\
+  !*** ./resources/js/views/LandingPageHome/wave.svg ***!
+  \*****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("/images/wave.svg?83a4c7b7bc737360083b6c8340c9b0bf");
 
 /***/ }),
 
@@ -74165,6 +74404,36 @@ var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_ruleSet_1_rules_8_oneOf_1_use_1_node_modules_postcss_loader_dist_cjs_js_ruleSet_1_rules_8_oneOf_1_use_2_node_modules_sass_loader_dist_cjs_js_ruleSet_1_rules_8_oneOf_1_use_3_App_scss__WEBPACK_IMPORTED_MODULE_1__.default.locals || {});
+
+/***/ }),
+
+/***/ "./resources/js/views/LandingPageHome/LandingPageHome.scss":
+/*!*****************************************************************!*\
+  !*** ./resources/js/views/LandingPageHome/LandingPageHome.scss ***!
+  \*****************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _node_modules_css_loader_dist_cjs_js_ruleSet_1_rules_8_oneOf_1_use_1_node_modules_postcss_loader_dist_cjs_js_ruleSet_1_rules_8_oneOf_1_use_2_node_modules_sass_loader_dist_cjs_js_ruleSet_1_rules_8_oneOf_1_use_3_LandingPageHome_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../../../node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[8].oneOf[1].use[1]!../../../../node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[8].oneOf[1].use[2]!../../../../node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[8].oneOf[1].use[3]!./LandingPageHome.scss */ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[8].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[8].oneOf[1].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[8].oneOf[1].use[3]!./resources/js/views/LandingPageHome/LandingPageHome.scss");
+
+            
+
+var options = {};
+
+options.insert = "head";
+options.singleton = false;
+
+var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_node_modules_css_loader_dist_cjs_js_ruleSet_1_rules_8_oneOf_1_use_1_node_modules_postcss_loader_dist_cjs_js_ruleSet_1_rules_8_oneOf_1_use_2_node_modules_sass_loader_dist_cjs_js_ruleSet_1_rules_8_oneOf_1_use_3_LandingPageHome_scss__WEBPACK_IMPORTED_MODULE_1__.default, options);
+
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_ruleSet_1_rules_8_oneOf_1_use_1_node_modules_postcss_loader_dist_cjs_js_ruleSet_1_rules_8_oneOf_1_use_2_node_modules_sass_loader_dist_cjs_js_ruleSet_1_rules_8_oneOf_1_use_3_LandingPageHome_scss__WEBPACK_IMPORTED_MODULE_1__.default.locals || {});
 
 /***/ }),
 
