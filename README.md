@@ -1,6 +1,7 @@
 # HR-dashboard
-
 An application created for the HR team to help manage applications from potential employees.
+
+### :warning: Still needs a lot of work.
 
 ## Features
 * Create custom application forms,
