@@ -15,7 +15,7 @@ class ApplicationController extends Controller {
    * 
    * @param  string  $hash_url
    * @return \Illuminate\Http\Response
-   */
+  */
   public function index($hash_url) {
       $position = JobPosition::where('hash_url', $hash_url)->first();
 
@@ -35,7 +35,7 @@ class ApplicationController extends Controller {
    * 
    * @param  string  $id
    * @return \Illuminate\Http\Response
-   */
+  */
   public function show_by_company($id) {
     $applications = Application::where('company_id', $id)->get();
 
@@ -47,7 +47,7 @@ class ApplicationController extends Controller {
     *
     * @param  \Illuminate\Http\Request  $request
     * @return \Illuminate\Http\Response
-   */
+  */
   public function create(Request $request) {
     $request->validate([
       'name' => 'required',
@@ -76,5 +76,17 @@ class ApplicationController extends Controller {
     Storage::putFileAs('resumes', new File($request->resume), $new_application->id.'.pdf');
     // return response()->json($new_application);
     return view("success", ['position' => json_decode($request->position)->name]);
+  }
+
+  /**
+   * Remove the specified resource from storage.
+    *
+    * @param  int  $id
+    * @return \Illuminate\Http\Response
+  */
+  public function destroy($id) {
+    $application = Application::find($id);
+    $application->delete();
+    return response()->json($application->toArray());
   }
 }

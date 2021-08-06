@@ -1,8 +1,9 @@
-import Header from "../../../components/Header"
 import FormSelectGroup from "../../../components/FormSelectGroup"
 import { useEffect, useState } from "react"
+import Application from "./Application"
+import axios from "axios"
 
-const Applications = ({ applications, positions }) => {
+const Applications = ({ applications, setApplications, positions }) => {
   const [type, setType] = useState('All')
   const [typeId, setTypeId] = useState('')
 
@@ -11,6 +12,11 @@ const Applications = ({ applications, positions }) => {
       ? setTypeId('')
       : setTypeId(positions.filter(position => position.name === type)[0].id)
   }, [type])
+
+  const deleteApplication = async (id) => {
+    const response = await axios.post(`/api/application/delete/${id}`)
+    setApplications(applications.filter(application => application.id !== response.data.id))
+  }
 
   const filteredApplications = (
     type === 'All'
@@ -26,36 +32,7 @@ const Applications = ({ applications, positions }) => {
       />
       <ul>
         {applications && filteredApplications.map(application =>
-          <li key={application.id} className='d-flex flex-column mt-2 p-4 bg-white border rounded'>
-            <Header headingLevel='h5' text={application.name} />
-
-            <a href={`/api/resume/${application.id}`} className='align-self-start'> Resume </a>
-
-            <ul className='pt-3'>
-              <li>
-                <span className='text-muted'> Position: </span>
-                {positions.filter(position =>
-                  parseInt(position.id) === parseInt(application.position_id)
-                )[0].name}
-              </li>
-              <li> <span className='text-muted'> Email: </span> {application.email} </li>
-              <li> <span className='text-muted'> Number: </span> {application.number} </li>
-            </ul>
-
-            <ul className='pb-3'>
-              {Object.keys(application.additional_questions).map((keyName, i) => (
-                application.additional_questions[keyName] &&
-                <li key={i}>
-                  <span className='text-muted'> {keyName}: </span>
-                  {application.additional_questions[keyName]}
-                </li>
-              ))}
-            </ul>
-            
-            <small className='text-muted'>
-              {new Date(application.created_at).toLocaleString()}
-            </small>
-          </li>
+          <Application key={application.id} application={application} positions={positions} handleDeleteApplication={deleteApplication} />
         )}
       </ul>
     </section>

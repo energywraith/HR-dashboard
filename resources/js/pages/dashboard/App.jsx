@@ -44,7 +44,7 @@ const App = () => {
           <Positions company={company} positions={positions} setPositions={setPositions} />
         </Route>
         <Route path='/dashboard/applications'>
-          <Applications applications={applications} positions={positions} />
+          <Applications applications={applications} setApplications={setApplications} positions={positions} />
         </Route>
         <Route path='/dashboard/' exact>
           <h1> Hello {company && company.name} </h1>

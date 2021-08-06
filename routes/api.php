@@ -66,3 +66,9 @@ Route::middleware('auth:sanctum')->get('/resume/{id}', [
     App\Http\Controllers\ResumesController::class,
     'view'
 ]);
+
+// Delete application
+Route::middleware('auth:sanctum')->post('/application/delete/{id}', [
+    App\Http\Controllers\ApplicationController::class,
+    'destroy'
+]);
