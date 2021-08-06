@@ -1,5 +1,5 @@
-import DashboardHeader from "../../components/DashboardHeader"
-import Nav from "../../components/Nav"
+import DashboardHeader from "./DashboardHeader"
+import Nav from "./Nav"
 import './Dashboard.scss'
 
 const Dashboard = (props) => {

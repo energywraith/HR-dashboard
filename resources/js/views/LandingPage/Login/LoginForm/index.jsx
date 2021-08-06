@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import FormInputGroup from "../FormInputGroup"
+import FormInputGroup from "../../../../components/FormInputGroup"
 
 const LoginForm = ({ formClassName }) => {
   const [name, setName] = useState('')

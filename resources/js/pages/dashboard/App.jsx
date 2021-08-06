@@ -4,10 +4,10 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 import Dashboard from '../../layouts/Dashboard';
-import CompanyDetails from '../../views/CompanyDetails';
-import ApplicationForm from '../../views/ApplicationForm';
-import Positions from '../../views/Positions';
-import Applications from '../../views/Applications';
+import CompanyDetails from '../../views/Dashboard/CompanyDetails';
+import ApplicationForm from '../../views/Dashboard/ApplicationForm';
+import Positions from '../../views/Dashboard/Positions';
+import Applications from '../../views/Dashboard/Applications';
 
 const App = () => {
   const [company, setCompany] = useState(null)

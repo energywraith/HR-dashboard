@@ -1,13 +1,12 @@
-import Header from '../../components/Header';
+import Header from '../../../components/Header';
 import ResumeSVG from './cv.svg'
+import './Home.scss';
 
-import './LandingPageHome.scss';
-
-const LandingPageHome = () => {
+const Home = () => {
   return (
     <div className='d-flex flex-column'>
       <section className='landing-page w-100 d-flex flex-column flex-lg-row align-items-center justify-content-center flex-grow-1'>
-        <div className='col-lg-6 d-flex flex-column p-5 p-lg-0'>
+        <div className='col-lg-6 d-flex flex-column p-lg-5 p-0'>
           <Header headingLevel='h1'
             text='Managing job applications has become much easier.'
             className='display-4 text-light font-weight-bold'
@@ -33,4 +32,4 @@ const LandingPageHome = () => {
   )
 }
 
-export default LandingPageHome
+export default Home

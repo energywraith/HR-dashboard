@@ -2,9 +2,9 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import LandingPage from '../../layouts/landingPage';
-import LandingPageHome from '../../views/LandingPageHome';
-import Login from '../../views/Login';
-import Register from '../../views/Register';
+import Home from '../../views/LandingPage/Home';
+import Login from '../../views/LandingPage/Login';
+import Register from '../../views/LandingPage/Register';
 import './App.scss'
 
 const App = () => {
@@ -18,7 +18,7 @@ const App = () => {
           <Register />
         </Route>
         <Route path='/'>
-          <LandingPageHome />
+          <Home />
         </Route>
       </Switch>
     </LandingPage>

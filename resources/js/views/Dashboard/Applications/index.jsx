@@ -1,5 +1,5 @@
-import Header from "../../components/Header"
-import FormSelectGroup from "../../components/FormSelectGroup"
+import Header from "../../../components/Header"
+import FormSelectGroup from "../../../components/FormSelectGroup"
 import { useEffect, useState } from "react"
 
 const Applications = ({ applications, positions }) => {

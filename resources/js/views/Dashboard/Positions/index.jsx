@@ -1,7 +1,7 @@
 import { useRef } from 'react';
 import axios from "axios"
-import ToggleComponent from "../../components/ToggleComponent"
-import AddPositionForm from '../../components/AddPositionForm'
+import ToggleComponent from "../../../components/ToggleComponent"
+import AddPositionForm from '../../../components/AddPositionForm'
 
 const Positions = ({ positions, setPositions, company }) => {
   const toggleComponentRef = useRef(null)

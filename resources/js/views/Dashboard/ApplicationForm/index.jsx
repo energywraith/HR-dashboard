@@ -1,8 +1,8 @@
 import { useEffect, useRef } from 'react';
 import axios from 'axios';
-import ToggleComponent from '../../components/ToggleComponent';
-import AddFieldForm from '../../components/AddFieldForm';
-import SortableList from '../../components/SortableList';
+import ToggleComponent from '../../../components/ToggleComponent';
+import AddFieldForm from '../../../components/AddFieldForm';
+import SortableList from '../../../components/SortableList';
 
 const ApplicationForm = ({ company, fields, setFields }) => {
   const toggleComponentRef = useRef(null)

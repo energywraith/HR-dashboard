@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import axios from 'axios'
-import FormInputGroup from "../../components/FormInputGroup"
+import FormInputGroup from "../../../components/FormInputGroup"
 
 const CompanyDetails = ({ company, setCompany }) => {
   const [companyName, setCompanyName] = useState('')

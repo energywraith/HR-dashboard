@@ -1,6 +1,6 @@
 import { useState } from "react"
 import axios from "axios"
-import FormInputGroup from "../FormInputGroup"
+import FormInputGroup from "../../../../components/FormInputGroup"
 
 const RegisterForm = ({ formClassName }) => {
   const [name, setName] = useState('')
@@ -23,8 +23,6 @@ const RegisterForm = ({ formClassName }) => {
       setValidationErrors(errors)
     }
   }
-
-  console.log(validationErrors)
 
   return (
     <form onSubmit={registerHandle} className={formClassName}>
