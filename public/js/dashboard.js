@@ -3549,11 +3549,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 
 
-var Header = function Header(_ref) {
-  var companyName = _ref.companyName;
-
+var Header = function Header() {
   var handleLogout = /*#__PURE__*/function () {
-    var _ref2 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee(event) {
+    var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee(event) {
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
@@ -3582,7 +3580,7 @@ var Header = function Header(_ref) {
     }));
 
     return function handleLogout(_x) {
-      return _ref2.apply(this, arguments);
+      return _ref.apply(this, arguments);
     };
   }();
 
@@ -3591,8 +3589,6 @@ var Header = function Header(_ref) {
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("a", {
       href: "/",
       children: "HR-dashboard"
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("span", {
-      children: companyName
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("a", {
       href: "",
       onClick: handleLogout,
@@ -3632,6 +3628,7 @@ var Link = function Link(_ref) {
       exact: exact,
       to: to,
       className: "nav-link",
+      activeClassName: "active",
       children: name
     })
   });
@@ -3745,14 +3742,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/esm/react-router.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/esm/react-router.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 /* harmony import */ var _layouts_Dashboard__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../layouts/Dashboard */ "./resources/js/layouts/Dashboard/index.jsx");
-/* harmony import */ var _views_Dashboard_CompanyDetails__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../views/Dashboard/CompanyDetails */ "./resources/js/views/Dashboard/CompanyDetails/index.jsx");
-/* harmony import */ var _views_Dashboard_ApplicationForm__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../views/Dashboard/ApplicationForm */ "./resources/js/views/Dashboard/ApplicationForm/index.jsx");
-/* harmony import */ var _views_Dashboard_Positions__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../views/Dashboard/Positions */ "./resources/js/views/Dashboard/Positions/index.jsx");
-/* harmony import */ var _views_Dashboard_Applications__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../views/Dashboard/Applications */ "./resources/js/views/Dashboard/Applications/index.jsx");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _views_Dashboard_Home__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../views/Dashboard/Home */ "./resources/js/views/Dashboard/Home/index.jsx");
+/* harmony import */ var _views_Dashboard_CompanyDetails__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../views/Dashboard/CompanyDetails */ "./resources/js/views/Dashboard/CompanyDetails/index.jsx");
+/* harmony import */ var _views_Dashboard_ApplicationForm__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../views/Dashboard/ApplicationForm */ "./resources/js/views/Dashboard/ApplicationForm/index.jsx");
+/* harmony import */ var _views_Dashboard_Positions__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../views/Dashboard/Positions */ "./resources/js/views/Dashboard/Positions/index.jsx");
+/* harmony import */ var _views_Dashboard_Applications__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../views/Dashboard/Applications */ "./resources/js/views/Dashboard/Applications/index.jsx");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -3770,6 +3768,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
 
 
 
@@ -3847,44 +3846,45 @@ var App = function App() {
 
     fetchInitData();
   }, []);
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(_layouts_Dashboard__WEBPACK_IMPORTED_MODULE_4__.default, {
-    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsxs)(react_router_dom__WEBPACK_IMPORTED_MODULE_10__.Switch, {
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_10__.Route, {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_layouts_Dashboard__WEBPACK_IMPORTED_MODULE_4__.default, {
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)(react_router_dom__WEBPACK_IMPORTED_MODULE_11__.Switch, {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_11__.Route, {
         path: "/dashboard/company-details",
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(_views_Dashboard_CompanyDetails__WEBPACK_IMPORTED_MODULE_5__.default, {
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_views_Dashboard_CompanyDetails__WEBPACK_IMPORTED_MODULE_6__.default, {
           company: company,
           setCompany: setCompany
         })
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_10__.Route, {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_11__.Route, {
         path: "/dashboard/application-form",
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(_views_Dashboard_ApplicationForm__WEBPACK_IMPORTED_MODULE_6__.default, {
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_views_Dashboard_ApplicationForm__WEBPACK_IMPORTED_MODULE_7__.default, {
           company: company,
           fields: formFields,
           setFields: setFormFields
         })
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_10__.Route, {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_11__.Route, {
         path: "/dashboard/positions",
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(_views_Dashboard_Positions__WEBPACK_IMPORTED_MODULE_7__.default, {
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_views_Dashboard_Positions__WEBPACK_IMPORTED_MODULE_8__.default, {
           company: company,
           positions: positions,
           setPositions: setPositions
         })
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_10__.Route, {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_11__.Route, {
         path: "/dashboard/applications",
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(_views_Dashboard_Applications__WEBPACK_IMPORTED_MODULE_8__.default, {
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_views_Dashboard_Applications__WEBPACK_IMPORTED_MODULE_9__.default, {
           applications: applications,
           setApplications: setApplications,
           positions: positions
         })
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_10__.Route, {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_11__.Route, {
         path: "/dashboard/",
         exact: true,
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsxs)("h1", {
-          children: [" Hello ", company && company.name, " "]
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_views_Dashboard_Home__WEBPACK_IMPORTED_MODULE_5__.default, {
+          company: company,
+          applications: applications
         })
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_10__.Route, {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_11__.Route, {
         path: "*",
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)("h1", {
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("h1", {
           children: " Page does not exist "
         })
       })]
@@ -3895,8 +3895,8 @@ var App = function App() {
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (App);
 
 if (document.getElementById('app')) {
-  react_dom__WEBPACK_IMPORTED_MODULE_3__.render( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_11__.BrowserRouter, {
-    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(App, {})
+  react_dom__WEBPACK_IMPORTED_MODULE_3__.render( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_12__.BrowserRouter, {
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(App, {})
   }), document.getElementById('app'));
 }
 
@@ -4427,6 +4427,42 @@ var CompanyDetails = function CompanyDetails(_ref) {
 };
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (CompanyDetails);
+
+/***/ }),
+
+/***/ "./resources/js/views/Dashboard/Home/index.jsx":
+/*!*****************************************************!*\
+  !*** ./resources/js/views/Dashboard/Home/index.jsx ***!
+  \*****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
+
+
+var Home = function Home(_ref) {
+  var company = _ref.company,
+      applications = _ref.applications;
+  return company ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("section", {
+    className: "p-2",
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("p", {
+      className: "h4",
+      children: ["Welcome ", company && company.name, " in your HR-Dashboard."]
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("span", {
+      className: "text-primary",
+      children: ["You have ", applications.length, " applications that needs to be proccessed."]
+    })]
+  }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", {
+    children: " Loading... "
+  });
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Home);
 
 /***/ }),
 
@@ -9082,7 +9118,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".dashboard-container {\n  height: 100vh;\n  max-height: 100vh;\n  display: grid;\n  grid-template-columns: auto 1fr;\n  grid-template-rows: auto 1fr;\n  row-gap: 1px;\n}\n.dashboard-container > nav {\n  background: white;\n  display: flex;\n  flex-direction: column;\n  height: 100%;\n  box-shadow: 0px 1px 1px black;\n}\n.dashboard-container > nav .nav-link-container {\n  background: white;\n  box-shadow: -1px 0px 1px black;\n}\n.dashboard-container > nav .nav-link-container .nav-link {\n  display: block;\n  padding: 1em 6em 1em 2em;\n  color: black;\n}\n.dashboard-container > nav .nav-link-container .nav-link:hover {\n  background: #f0f0f0;\n}\n.dashboard-container > main {\n  overflow-y: scroll;\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".dashboard-container {\n  height: 100vh;\n  max-height: 100vh;\n  display: grid;\n  grid-template-columns: auto 1fr;\n  grid-template-rows: auto 1fr;\n  row-gap: 1px;\n}\n.dashboard-container > nav {\n  background: white;\n  display: flex;\n  flex-direction: column;\n  height: 100%;\n  box-shadow: 0px 1px 1px black;\n}\n.dashboard-container > nav .nav-link-container {\n  background: white;\n  box-shadow: -1px 0px 1px black;\n}\n.dashboard-container > nav .nav-link-container .nav-link {\n  display: block;\n  padding: 1em 6em 1em 2em;\n  color: black;\n}\n.dashboard-container > nav .nav-link-container .nav-link:hover, .dashboard-container > nav .nav-link-container .nav-link.active {\n  background: #f0f0f0;\n}\n.dashboard-container > main {\n  overflow-y: scroll;\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -9106,7 +9142,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".dashboard-header {\n  grid-column: 1/3;\n  background: white;\n  box-shadow: 0px 0px 1px black;\n  padding: 0.5em 2em;\n  font-weight: bold;\n  letter-spacing: 1px;\n  display: flex;\n  justify-content: space-between;\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".dashboard-header {\n  grid-column: 1/3;\n  background: white;\n  box-shadow: 0px 0px 1px black;\n  padding: 0.5em 2em;\n  font-weight: bold;\n  letter-spacing: 1px;\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n}\n.dashboard-header > a {\n  text-decoration: none;\n  font-size: 1.1em;\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

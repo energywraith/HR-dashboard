@@ -1,6 +1,6 @@
 import './Header.scss'
 
-const Header = ({ companyName }) => {
+const Header = () => {
   const handleLogout = async (event) => {
     event.preventDefault;
     try {
@@ -16,9 +16,6 @@ const Header = ({ companyName }) => {
       <a href='/'>
         HR-dashboard
       </a>
-      <span>
-        {companyName}
-      </span>
       <a href='' onClick={handleLogout}>
         Logout
       </a>

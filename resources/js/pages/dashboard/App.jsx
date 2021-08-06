@@ -4,6 +4,7 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 import Dashboard from '../../layouts/Dashboard';
+import Home from '../../views/Dashboard/Home';
 import CompanyDetails from '../../views/Dashboard/CompanyDetails';
 import ApplicationForm from '../../views/Dashboard/ApplicationForm';
 import Positions from '../../views/Dashboard/Positions';
@@ -47,7 +48,7 @@ const App = () => {
           <Applications applications={applications} setApplications={setApplications} positions={positions} />
         </Route>
         <Route path='/dashboard/' exact>
-          <h1> Hello {company && company.name} </h1>
+          <Home company={company} applications={applications} />
         </Route>
         <Route path='*'>
           <h1> Page does not exist </h1>

@@ -15,7 +15,6 @@
     box-shadow: 0px 1px 1px black;
   
     .nav-link-container {
-      // border: 0;
       background: white;
       box-shadow: -1px 0px 1px black;
   
@@ -24,7 +23,8 @@
         padding: 1em 6em 1em 2em;
         color: black;
   
-        &:hover {
+        &:hover,
+        &.active {
           background: rgb(240, 240, 240);
         }
       }

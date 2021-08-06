@@ -36,6 +36,5 @@ You can now attend [localhost](http://127.0.0.1:8000/) to visit the page.
 ## Things to create/improve
 * More content on landing page
 * Edit positions
-* Delete applications
 * Mobile view in dashboard
 * Statistics on dashboard home view
